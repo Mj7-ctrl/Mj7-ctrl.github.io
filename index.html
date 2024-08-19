@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Softwarefirma</title>
+    <title>NovaTech Solutions</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,7 +13,7 @@
             color: #333;
         }
         header {
-            background-color: #333;
+            background-color: #222;
             color: white;
             padding: 1rem 0;
             text-align: center;
@@ -25,7 +25,7 @@
         nav {
             display: flex;
             justify-content: center;
-            background-color: #444;
+            background-color: #333;
             padding: 0.5rem 0;
         }
         nav a {
@@ -83,16 +83,43 @@
             margin: 2rem 0;
         }
         footer {
-            background-color: #333;
+            background-color: #222;
             color: white;
             text-align: center;
             padding: 1rem 0;
+        }
+        .contact form {
+            max-width: 600px;
+            margin: auto;
+            text-align: left;
+        }
+        .contact label {
+            display: block;
+            margin: 1rem 0 0.5rem;
+        }
+        .contact input, .contact textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact button {
+            padding: 0.7rem 1.5rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .contact button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Softwarefirma</h1>
+        <h1>NovaTech Solutions</h1>
     </header>
     <nav>
         <a href="#services">Tjenester</a>
@@ -100,45 +127,63 @@
         <a href="#contact">Kontakt</a>
     </nav>
     <section class="hero">
-        <h2>Vi skaber fremtidens softwareløsninger</h2>
-        <p>Din partner i teknologiudvikling</p>
+        <h2>Innovative Softwareløsninger til SMB'er</h2>
+        <p>Transformér din forretning med AI-drevne løsninger</p>
     </section>
     <section id="services" class="services">
         <h3>Vores Tjenester</h3>
         <div class="service-item">
-            <img src="images/software-development.png" alt="Software Udvikling">
+            <img src="images/ai.png" alt="NovaAI">
             <div>
-                <h4>Softwareudvikling</h4>
-                <p>Vi udvikler skalerbare og højtydende softwareløsninger, skræddersyet til dine forretningsbehov.</p>
+                <h4>NovaAI</h4>
+                <p>En AI-drevet platform, der analyserer forretningsdata og giver beslutningstagere værdifulde indsigter.</p>
             </div>
         </div>
         <div class="service-item">
-            <img src="images/web-development.png" alt="Webudvikling">
+            <img src="images/process.png" alt="ProcessOptimizer">
             <div>
-                <h4>Webudvikling</h4>
-                <p>Vores team bygger moderne og interaktive webapplikationer, der engagerer dine kunder.</p>
+                <h4>ProcessOptimizer</h4>
+                <p>Automatiser gentagne opgaver og integrér med eksisterende systemer for at øge effektiviteten.</p>
             </div>
         </div>
         <div class="service-item">
-            <img src="images/mobile-development.png" alt="Mobil Udvikling">
+            <img src="images/customer-service.png" alt="CustomerEngage">
             <div>
-                <h4>Mobiludvikling</h4>
-                <p>Skab innovative mobilapps, der bringer din virksomhed tættere på dine kunder.</p>
+                <h4>CustomerEngage</h4>
+                <p>Forbedr kundeservice med AI-drevne chatbots og automatiseret feedback.</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img src="images/cloud.png" alt="SecureCloud">
+            <div>
+                <h4>SecureCloud</h4>
+                <p>En sikker cloud-baseret platform til datalagring og samarbejde for SMB'er.</p>
             </div>
         </div>
     </section>
     <section id="about" class="about">
         <h3>Om Os</h3>
-        <p>Vi er et passioneret team af softwareingeniører og designere, der er dedikeret til at skabe den bedste software for vores kunder.</p>
-        <img src="images/team-photo.jpg" alt="Vores Team">
+        <p>NovaTech Solutions er dedikeret til at levere de mest innovative og effektive softwareløsninger til små og mellemstore virksomheder.</p>
+        <img src="images/team.jpg" alt="Vores Team">
     </section>
     <section id="contact" class="contact">
         <h3>Kontakt Os</h3>
         <p>Har du et projekt i tankerne? Vi vil gerne høre fra dig!</p>
-        <p>Email: info@softwarefirma.com | Telefon: +45 12 34 56 78</p>
+        <form action="#">
+            <label for="name">Navn:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Besked:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit">Send Besked</button>
+        </form>
     </section>
     <footer>
-        <p>© 2024 Softwarefirma. Alle rettigheder forbeholdes.</p>
+        <p>© 2024 NovaTech Solutions. Alle rettigheder forbeholdes.</p>
     </footer>
 </body>
 </html>
