@@ -7,74 +7,86 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            background-color: #f4f4f4;
+            color: #333;
         }
         header {
             background-color: #333;
             color: white;
-            width: 100%;
-            padding: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            text-align: center;
         }
-        h1 {
-            margin: 0;
-        }
-        .hero {
-            background-color: #4CAF50;
-            color: white;
-            padding: 3rem 1rem;
-            margin-top: 20px;
-            width: 100%;
-        }
-        .hero h2 {
+        header h1 {
             margin: 0;
             font-size: 2.5rem;
         }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 0.5rem 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+        }
+        nav a:hover {
+            color: #4CAF50;
+        }
+        .hero {
+            background-image: url('images/hero-image.jpg'); /* Upload og erstat med dit billede */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 1rem;
+            text-align: center;
+        }
+        .hero h2 {
+            font-size: 3rem;
+            margin: 0;
+        }
         .hero p {
-            font-size: 1.2rem;
-            margin-top: 10px;
+            font-size: 1.5rem;
+            margin-top: 1rem;
         }
-        .services {
-            padding: 2rem 1rem;
+        .services, .about, .contact {
+            padding: 3rem 1rem;
+            text-align: center;
             background-color: #fff;
-            width: 100%;
+            margin: 1rem 0;
         }
-        .services h3 {
-            margin-bottom: 1rem;
+        .services h3, .about h3, .contact h3 {
             color: #4CAF50;
+            margin-bottom: 1.5rem;
         }
-        .services p {
-            font-size: 1rem;
-            margin-bottom: 1rem;
+        .services .service-item {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
         }
-        .contact {
-            padding: 2rem 1rem;
+        .services .service-item img {
+            width: 80px;
+            margin-right: 20px;
+        }
+        .services .service-item div {
+            max-width: 500px;
+            text-align: left;
+        }
+        .about img {
             width: 100%;
-            background-color: #f4f4f4;
-        }
-        .contact h3 {
-            margin-bottom: 1rem;
-            color: #4CAF50;
-        }
-        .contact p {
-            font-size: 1rem;
-            margin-bottom: 1rem;
+            max-width: 600px;
+            border-radius: 10px;
+            margin: 2rem 0;
         }
         footer {
-            width: 100%;
             background-color: #333;
             color: white;
-            padding: 1rem;
             text-align: center;
-            margin-top: 20px;
+            padding: 1rem 0;
         }
     </style>
 </head>
@@ -82,21 +94,48 @@
     <header>
         <h1>Softwarefirma</h1>
     </header>
-    <div class="hero">
-        <h2>Vi udvikler fremtidens løsninger</h2>
-        <p>Specialiserede i skræddersyet software til virksomheder.</p>
-    </div>
-    <section class="services">
-        <h3>Vores tjenester</h3>
-        <p><strong>Softwareudvikling:</strong> Vi leverer højtydende, skalerbare softwareløsninger til alle forretningsbehov.</p>
-        <p><strong>Webudvikling:</strong> Professionelle webapplikationer og hjemmesider, der driver din virksomhed fremad.</p>
-        <p><strong>Mobiludvikling:</strong> Skab banebrydende mobilapps, der engagerer og inspirerer dine kunder.</p>
+    <nav>
+        <a href="#services">Tjenester</a>
+        <a href="#about">Om Os</a>
+        <a href="#contact">Kontakt</a>
+    </nav>
+    <section class="hero">
+        <h2>Vi skaber fremtidens softwareløsninger</h2>
+        <p>Din partner i teknologiudvikling</p>
     </section>
-    <section class="contact">
-        <h3>Kontakt os</h3>
-        <p>Har du et projekt i tankerne? Lad os arbejde sammen for at realisere dine ideer.</p>
-        <p>Email: info@softwarefirma.com</p>
-        <p>Telefon: +45 12 34 56 78</p>
+    <section id="services" class="services">
+        <h3>Vores Tjenester</h3>
+        <div class="service-item">
+            <img src="images/software-development.png" alt="Software Udvikling">
+            <div>
+                <h4>Softwareudvikling</h4>
+                <p>Vi udvikler skalerbare og højtydende softwareløsninger, skræddersyet til dine forretningsbehov.</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img src="images/web-development.png" alt="Webudvikling">
+            <div>
+                <h4>Webudvikling</h4>
+                <p>Vores team bygger moderne og interaktive webapplikationer, der engagerer dine kunder.</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img src="images/mobile-development.png" alt="Mobil Udvikling">
+            <div>
+                <h4>Mobiludvikling</h4>
+                <p>Skab innovative mobilapps, der bringer din virksomhed tættere på dine kunder.</p>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about">
+        <h3>Om Os</h3>
+        <p>Vi er et passioneret team af softwareingeniører og designere, der er dedikeret til at skabe den bedste software for vores kunder.</p>
+        <img src="images/team-photo.jpg" alt="Vores Team">
+    </section>
+    <section id="contact" class="contact">
+        <h3>Kontakt Os</h3>
+        <p>Har du et projekt i tankerne? Vi vil gerne høre fra dig!</p>
+        <p>Email: info@softwarefirma.com | Telefon: +45 12 34 56 78</p>
     </section>
     <footer>
         <p>© 2024 Softwarefirma. Alle rettigheder forbeholdes.</p>
