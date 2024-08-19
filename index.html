@@ -6,87 +6,75 @@
     <title>NovaTech Solutions</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f5f5f5;
             color: #333;
+            line-height: 1.6;
         }
         header {
-            background-color: #222;
+            background: url('https://via.placeholder.com/1500x500') no-repeat center center/cover;
             color: white;
-            padding: 1rem 0;
+            padding: 2rem 0;
             text-align: center;
         }
         header h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 3rem;
         }
         nav {
-            display: flex;
-            justify-content: center;
-            background-color: #333;
-            padding: 0.5rem 0;
+            background: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
         }
         nav a {
             color: white;
             text-decoration: none;
             margin: 0 15px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
         nav a:hover {
             color: #4CAF50;
         }
         .hero {
-            background-image: url('images/hero-image.jpg'); /* Upload og erstat med dit billede */
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 5rem 1rem;
             text-align: center;
+            padding: 3rem 1rem;
+            background-color: #4CAF50;
+            color: white;
         }
         .hero h2 {
-            font-size: 3rem;
-            margin: 0;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
-        .hero p {
-            font-size: 1.5rem;
-            margin-top: 1rem;
-        }
-        .services, .about, .contact {
+        .services, .about, .process, .testimonials, .cases, .contact {
             padding: 3rem 1rem;
             text-align: center;
-            background-color: #fff;
-            margin: 1rem 0;
         }
-        .services h3, .about h3, .contact h3 {
-            color: #4CAF50;
-            margin-bottom: 1.5rem;
-        }
-        .services .service-item {
-            display: flex;
-            justify-content: center;
+        .services h3, .about h3, .process h3, .testimonials h3, .cases h3, .contact h3 {
             margin-bottom: 2rem;
+            color: #333;
+            font-size: 2rem;
         }
-        .services .service-item img {
-            width: 80px;
+        .services .service-item, .process .step, .testimonials .testimonial, .cases .case {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .services img, .process img, .testimonials img, .cases img {
+            max-width: 100px;
             margin-right: 20px;
         }
-        .services .service-item div {
-            max-width: 500px;
-            text-align: left;
+        .services div, .process div, .testimonials div, .cases div {
+            max-width: 600px;
         }
         .about img {
             width: 100%;
             max-width: 600px;
             border-radius: 10px;
             margin: 2rem 0;
-        }
-        footer {
-            background-color: #222;
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
         }
         .contact form {
             max-width: 600px;
@@ -115,6 +103,20 @@
         .contact button:hover {
             background-color: #45a049;
         }
+        footer {
+            background: #333;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        footer a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #4CAF50;
+        }
     </style>
 </head>
 <body>
@@ -124,6 +126,9 @@
     <nav>
         <a href="#services">Tjenester</a>
         <a href="#about">Om Os</a>
+        <a href="#process">Vores Process</a>
+        <a href="#testimonials">Testimonialer</a>
+        <a href="#cases">Cases</a>
         <a href="#contact">Kontakt</a>
     </nav>
     <section class="hero">
@@ -133,28 +138,28 @@
     <section id="services" class="services">
         <h3>Vores Tjenester</h3>
         <div class="service-item">
-            <img src="images/ai.png" alt="NovaAI">
+            <img src="https://via.placeholder.com/100" alt="NovaAI">
             <div>
                 <h4>NovaAI</h4>
                 <p>En AI-drevet platform, der analyserer forretningsdata og giver beslutningstagere værdifulde indsigter.</p>
             </div>
         </div>
         <div class="service-item">
-            <img src="images/process.png" alt="ProcessOptimizer">
+            <img src="https://via.placeholder.com/100" alt="ProcessOptimizer">
             <div>
                 <h4>ProcessOptimizer</h4>
                 <p>Automatiser gentagne opgaver og integrér med eksisterende systemer for at øge effektiviteten.</p>
             </div>
         </div>
         <div class="service-item">
-            <img src="images/customer-service.png" alt="CustomerEngage">
+            <img src="https://via.placeholder.com/100" alt="CustomerEngage">
             <div>
                 <h4>CustomerEngage</h4>
                 <p>Forbedr kundeservice med AI-drevne chatbots og automatiseret feedback.</p>
             </div>
         </div>
         <div class="service-item">
-            <img src="images/cloud.png" alt="SecureCloud">
+            <img src="https://via.placeholder.com/100" alt="SecureCloud">
             <div>
                 <h4>SecureCloud</h4>
                 <p>En sikker cloud-baseret platform til datalagring og samarbejde for SMB'er.</p>
@@ -163,27 +168,97 @@
     </section>
     <section id="about" class="about">
         <h3>Om Os</h3>
-        <p>NovaTech Solutions er dedikeret til at levere de mest innovative og effektive softwareløsninger til små og mellemstore virksomheder.</p>
-        <img src="images/team.jpg" alt="Vores Team">
+        <p>NovaTech Solutions er dedikeret til at levere de mest innovative og effektive softwareløsninger til små og mellemstore virksomheder. Vores team består af eksperter inden for AI, cloud computing, og automatisering, som arbejder sammen for at levere løsninger, der gør en forskel.</p>
+        <img src="https://via.placeholder.com/600x400" alt="Vores Team">
     </section>
-    <section id="contact" class="contact">
-        <h3>Kontakt Os</h3>
-        <p>Har du et projekt i tankerne? Vi vil gerne høre fra dig!</p>
-        <form action="#">
-            <label for="name">Navn:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Besked:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-
-            <button type="submit">Send Besked</button>
-        </form>
+    <section id="process" class="process">
+        <h3>Vores Process</h3>
+        <div class="step">
+            <img src="https://via.placeholder.com/100" alt="Step 1">
+            <div>
+                <h4>Analyse</h4>
+                <p>Vi starter med en dybdegående analyse af din virksomheds behov og mål.</p>
+            </div>
+        </div>
+        <div class="step">
+            <img src="https://via.placeholder.com/100" alt="Step 2">
+            <div>
+                <h4>Design</h4>
+                <p>Vores designteam skaber en skræddersyet løsning, der passer perfekt til dine behov.</p>
+            </div>
+        </div>
+        <div class="step">
+            <img src="https://via.placeholder.com/100" alt="Step 3">
+            <div>
+                <h4>Udvikling</h4>
+                <p>Vi udvikler løsningen med fokus på kvalitet, effektivitet og sikkerhed.</p>
+            </div>
+        </div>
+        <div class="step">
+            <img src="https://via.placeholder.com/100" alt="Step 4">
+            <div>
+                <h4>Implementering</h4>
+                <p>Efter grundig testning implementerer vi løsningen i din virksomhed.</p>
+            </div>
+        </div>
     </section>
-    <footer>
-        <p>© 2024 NovaTech Solutions. Alle rettigheder forbeholdes.</p>
-    </footer>
-</body>
-</html>
+    <section id="testimonials" class="testimonials">
+        <h3>Testimonialer</h3>    <div class="testimonial">
+        <img src="https://via.placeholder.com/100" alt="Kunde 1">
+        <div>
+            <h4>Maria Hansen, CEO hos ABC Firma</h4>
+            <p>NovaTech har transformeret vores forretning med deres innovative løsninger. Vi har set en markant stigning i effektiviteten siden implementeringen af deres systemer.</p>
+        </div>
+    </div>
+    <div class="testimonial">
+        <img src="https://via.placeholder.com/100" alt="Kunde 2">
+        <div>
+            <h4>Peter Larsen, IT Manager hos XYZ Corp</h4>
+            <p>Jeg kan varmt anbefale NovaTech til enhver virksomhed, der ønsker at optimere deres processer med avanceret teknologi. Deres team er professionelt, og deres løsninger er uovertrufne.</p>
+        </div>
+    </div>
+</section>
+<section id="cases" class="cases">
+    <h3>Cases</h3>
+    <div class="case">
+        <img src="https://via.placeholder.com/100" alt="Case 1">
+        <div>
+            <h4>Case Study: Optimering af processer hos ABC Firma</h4>
+            <p>Ved hjælp af vores ProcessOptimizer har ABC Firma reduceret deres operationelle omkostninger med 30% og øget deres produktivitet med 20%.</p>
+        </div>
+    </div>
+    <div class="case">
+        <img src="https://via.placeholder.com/100" alt="Case 2">
+        <div>
+            <h4>Case Study: Forbedring af kundeservice hos XYZ Corp</h4>
+            <p>Vores CustomerEngage-løsning har forbedret kundetilfredsheden hos XYZ Corp med 25% på blot seks måneder.</p>
+        </div>
+    </div>
+</section>
+<section id="contact" class="contact">
+    <h3>Kontakt Os</h3>
+    <p>Har du et projekt i tankerne? Vi vil gerne høre fra dig!</p>
+    <form action="#">
+        <label for="name">Navn:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Besked:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit">Send Besked</button>
+    </form>
+</section>
+<footer>
+    <p>© 2024 NovaTech Solutions. Alle rettigheder forbeholdes.</p>
+    <p>
+        <a href="#services">Tjenester</a> | 
+        <a href="#about">Om Os</a> | 
+        <a href="#process">Vores Process</a> | 
+        <a href="#testimonials">Testimonialer</a> | 
+        <a href="#cases">Cases</a> | 
+        <a href="#contact">Kontakt</a>
+    </p>
+</footer>
