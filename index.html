@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Min Hjemmeside</title>
+    <title>Softwarefirma</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,11 +15,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
             text-align: center;
         }
         header {
-            background-color: #4CAF50;
+            background-color: #333;
             color: white;
             width: 100%;
             padding: 1rem;
@@ -28,30 +27,79 @@
         h1 {
             margin: 0;
         }
-        p {
+        .hero {
+            background-color: #4CAF50;
+            color: white;
+            padding: 3rem 1rem;
+            margin-top: 20px;
+            width: 100%;
+        }
+        .hero h2 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .hero p {
             font-size: 1.2rem;
+            margin-top: 10px;
+        }
+        .services {
+            padding: 2rem 1rem;
+            background-color: #fff;
+            width: 100%;
+        }
+        .services h3 {
+            margin-bottom: 1rem;
+            color: #4CAF50;
+        }
+        .services p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .contact {
+            padding: 2rem 1rem;
+            width: 100%;
+            background-color: #f4f4f4;
+        }
+        .contact h3 {
+            margin-bottom: 1rem;
+            color: #4CAF50;
+        }
+        .contact p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
         }
         footer {
-            position: absolute;
-            bottom: 0;
             width: 100%;
             background-color: #333;
             color: white;
             padding: 1rem;
             text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Velkommen til Min Hjemmeside!</h1>
+        <h1>Softwarefirma</h1>
     </header>
-    <main>
-        <p>Dette er en flottere og forbedret statisk hjemmeside hostet på GitHub Pages.</p>
-        <p>Her kan du tilføje mere indhold og gøre din side mere interaktiv.</p>
-    </main>
+    <div class="hero">
+        <h2>Vi udvikler fremtidens løsninger</h2>
+        <p>Specialiserede i skræddersyet software til virksomheder.</p>
+    </div>
+    <section class="services">
+        <h3>Vores tjenester</h3>
+        <p><strong>Softwareudvikling:</strong> Vi leverer højtydende, skalerbare softwareløsninger til alle forretningsbehov.</p>
+        <p><strong>Webudvikling:</strong> Professionelle webapplikationer og hjemmesider, der driver din virksomhed fremad.</p>
+        <p><strong>Mobiludvikling:</strong> Skab banebrydende mobilapps, der engagerer og inspirerer dine kunder.</p>
+    </section>
+    <section class="contact">
+        <h3>Kontakt os</h3>
+        <p>Har du et projekt i tankerne? Lad os arbejde sammen for at realisere dine ideer.</p>
+        <p>Email: info@softwarefirma.com</p>
+        <p>Telefon: +45 12 34 56 78</p>
+    </section>
     <footer>
-        <p>© 2024 Min Hjemmeside. Alle rettigheder forbeholdes.</p>
+        <p>© 2024 Softwarefirma. Alle rettigheder forbeholdes.</p>
     </footer>
 </body>
 </html>
