@@ -20,6 +20,8 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
         }
         h1 {
             text-align: center;
@@ -31,11 +33,12 @@
             display: block;
             margin-bottom: 5px;
         }
-        input[type="text"], input[type="number"] {
+        input[type="number"], input[type="text"] {
             width: 100%;
             padding: 8px;
             border-radius: 4px;
             border: 1px solid #ddd;
+            margin-bottom: 10px;
         }
         button {
             width: 100%;
@@ -45,9 +48,22 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 16px;
         }
         button:hover {
             background-color: #218838;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        .chart-container {
+            margin-top: 20px;
+            width: 100%;
+            height: 300px;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
@@ -62,31 +78,92 @@
             <label for="steps">Indtast antal skridt i dag:</label>
             <input type="number" id="steps" placeholder="Antal skridt">
         </div>
+        <div class="form-group">
+            <label for="sleep">Indtast antal timers søvn i nat:</label>
+            <input type="number" id="sleep" placeholder="Søvntimer">
+        </div>
         <button onclick="analyzeHealth()">Analyser mit helbred</button>
         <div id="result"></div>
+        <div class="chart-container">
+            <canvas id="healthChart"></canvas>
+        </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         function analyzeHealth() {
             let heartrate = document.getElementById('heartrate').value;
             let steps = document.getElementById('steps').value;
+            let sleep = document.getElementById('sleep').value;
             let result = document.getElementById('result');
 
-            if (heartrate && steps) {
-                if (heartrate > 100) {
-                    result.innerHTML = "<p style='color:red;'>Advarsel: Din puls er høj. Overvej at tage en pause og slappe af.</p>";
-                } else {
-                    result.innerHTML = "<p style='color:green;'>Din puls er inden for et normalt interval. Godt gået!</p>";
-                }
+            let warnings = [];
+            let healthData = [];
 
-                if (steps < 5000) {
-                    result.innerHTML += "<p style='color:red;'>Du har gået mindre end 5000 skridt i dag. Prøv at være mere aktiv.</p>";
+            if (heartrate) {
+                if (heartrate > 100) {
+                    warnings.push("Advarsel: Din puls er høj. Overvej at tage en pause og slappe af.");
+                } else if (heartrate < 60) {
+                    warnings.push("Din puls er lavere end normalt. Sørg for at du er hydreret og spis godt.");
                 } else {
-                    result.innerHTML += "<p style='color:green;'>Godt gået! Du har nået et sundt antal skridt i dag.</p>";
+                    warnings.push("Din puls er inden for et normalt interval. Godt gået!");
                 }
+                healthData.push({ label: 'Puls', value: heartrate });
             } else {
-                result.innerHTML = "<p style='color:red;'>Indtast venligst både din puls og antal skridt.</p>";
+                warnings.push("Pulsdata mangler.");
             }
+
+            if (steps) {
+                if (steps < 5000) {
+                    warnings.push("Du har gået mindre end 5000 skridt i dag. Prøv at være mere aktiv.");
+                } else {
+                    warnings.push("Godt gået! Du har nået et sundt antal skridt i dag.");
+                }
+                healthData.push({ label: 'Skridt', value: steps });
+            } else {
+                warnings.push("Skridttælling mangler.");
+            }
+
+            if (sleep) {
+                if (sleep < 7) {
+                    warnings.push("Du har sovet mindre end 7 timer. Prøv at få mere søvn for optimal sundhed.");
+                } else {
+                    warnings.push("God søvnrytme! Du har sovet godt.");
+                }
+                healthData.push({ label: 'Søvn', value: sleep });
+            } else {
+                warnings.push("Søvndata mangler.");
+            }
+
+            result.innerHTML = warnings.map(warning => `<p style="color:red;">${warning}</p>`).join('');
+
+            // Update the chart
+            updateChart(healthData);
+        }
+
+        function updateChart(healthData) {
+            const ctx = document.getElementById('healthChart').getContext('2d');
+            const labels = healthData.map(data => data.label);
+            const dataValues = healthData.map(data => data.value);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Sundhedsdata',
+                        data: dataValues,
+                        backgroundColor: ['#4caf50', '#2196f3', '#ff9800'],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
         }
     </script>
 </body>
