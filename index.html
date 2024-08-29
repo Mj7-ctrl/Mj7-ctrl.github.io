@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sundhedsplatform Prototype</title>
+    <title>Advanced Health Platform Prototype</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,18 +13,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
         .container {
             background-color: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
+            max-width: 700px;
             width: 100%;
         }
         h1 {
             text-align: center;
+            color: #333;
         }
         .form-group {
             margin-bottom: 15px;
@@ -32,29 +33,32 @@
         label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
         }
         input[type="number"], input[type="text"] {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             border-radius: 4px;
             border: 1px solid #ddd;
             margin-bottom: 10px;
+            font-size: 16px;
         }
         button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background-color: #28a745;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
         }
         button:hover {
             background-color: #218838;
         }
         #result {
             margin-top: 20px;
+            font-size: 16px;
         }
         .chart-container {
             margin-top: 20px;
@@ -69,18 +73,26 @@
 </head>
 <body>
     <div class="container">
-        <h1>Sundhedsplatform Prototype</h1>
+        <h1>Advanced Health Platform</h1>
         <div class="form-group">
-            <label for="heartrate">Indtast din puls:</label>
-            <input type="number" id="heartrate" placeholder="Puls (bpm)">
+            <label for="heartrate">Puls (bpm):</label>
+            <input type="number" id="heartrate" placeholder="Indtast din puls">
         </div>
         <div class="form-group">
-            <label for="steps">Indtast antal skridt i dag:</label>
-            <input type="number" id="steps" placeholder="Antal skridt">
+            <label for="steps">Antal skridt i dag:</label>
+            <input type="number" id="steps" placeholder="Indtast antal skridt">
         </div>
         <div class="form-group">
-            <label for="sleep">Indtast antal timers søvn i nat:</label>
-            <input type="number" id="sleep" placeholder="Søvntimer">
+            <label for="sleep">Søvntimer i nat:</label>
+            <input type="number" id="sleep" placeholder="Indtast søvntimer">
+        </div>
+        <div class="form-group">
+            <label for="weight">Vægt (kg):</label>
+            <input type="number" id="weight" placeholder="Indtast din vægt">
+        </div>
+        <div class="form-group">
+            <label for="hydration">Vandindtag (ml):</label>
+            <input type="number" id="hydration" placeholder="Indtast vandindtag i dag">
         </div>
         <button onclick="analyzeHealth()">Analyser mit helbred</button>
         <div id="result"></div>
@@ -95,6 +107,8 @@
             let heartrate = document.getElementById('heartrate').value;
             let steps = document.getElementById('steps').value;
             let sleep = document.getElementById('sleep').value;
+            let weight = document.getElementById('weight').value;
+            let hydration = document.getElementById('hydration').value;
             let result = document.getElementById('result');
 
             let warnings = [];
@@ -135,6 +149,28 @@
                 warnings.push("Søvndata mangler.");
             }
 
+            if (weight) {
+                if (weight < 50 || weight > 100) {
+                    warnings.push("Din vægt ligger uden for det anbefalede interval. Konsulter en sundhedsekspert.");
+                } else {
+                    warnings.push("Din vægt er inden for det anbefalede interval.");
+                }
+                healthData.push({ label: 'Vægt', value: weight });
+            } else {
+                warnings.push("Vægtdata mangler.");
+            }
+
+            if (hydration) {
+                if (hydration < 2000) {
+                    warnings.push("Du har indtaget mindre end 2 liter vand i dag. Sørg for at drikke mere.");
+                } else {
+                    warnings.push("Godt gået! Du har drukket tilstrækkeligt med vand i dag.");
+                }
+                healthData.push({ label: 'Vandindtag', value: hydration });
+            } else {
+                warnings.push("Vandindtagsdata mangler.");
+            }
+
             result.innerHTML = warnings.map(warning => `<p style="color:red;">${warning}</p>`).join('');
 
             // Update the chart
@@ -147,19 +183,22 @@
             const dataValues = healthData.map(data => data.value);
 
             new Chart(ctx, {
-                type: 'bar',
+                type: 'radar',
                 data: {
                     labels: labels,
                     datasets: [{
                         label: 'Sundhedsdata',
                         data: dataValues,
-                        backgroundColor: ['#4caf50', '#2196f3', '#ff9800'],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        pointBackgroundColor: 'rgba(75, 192, 192, 1)',
                     }]
                 },
                 options: {
                     scales: {
-                        y: {
-                            beginAtZero: true
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
                         }
                     }
                 }
