@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HealthPro 3.0 - Fremtidens Sundhedsassistent</title>
+    <title>HealthPro X - Fremtidens Sundhedsteknologi</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #f8f9fa, #e0f7fa);
-            color: #333;
+            background-color: #1e1e2f;
+            color: #ffffff;
             margin: 0;
             padding: 0;
             display: flex;
@@ -18,38 +18,37 @@
             height: 100vh;
         }
         .app-container {
-            background: white;
+            background: #28293d;
             width: 100%;
             max-width: 400px;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
         .header {
-            background-color: #00796b;
+            background-color: #3b3c50;
             padding: 20px;
             text-align: center;
-            color: white;
         }
         .header h1 {
             margin: 0;
             font-size: 24px;
+            color: #ff6f61;
         }
         .nav-bar {
             display: flex;
             justify-content: space-around;
-            background-color: #004d40;
+            background-color: #2d2e42;
             padding: 10px 0;
-            color: white;
         }
         .nav-bar a {
             text-decoration: none;
-            color: white;
+            color: #ffffff;
             font-weight: bold;
             transition: color 0.3s ease;
         }
         .nav-bar a:hover {
-            color: #e0f7fa;
+            color: #ff6f61;
         }
         .content {
             padding: 20px;
@@ -58,19 +57,22 @@
             font-weight: bold;
             display: block;
             margin-top: 20px;
+            color: #ff6f61;
         }
-        input[type="number"] {
+        input[type="number"], input[type="text"] {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
             border-radius: 10px;
-            border: 1px solid #ccd0d5;
+            border: 1px solid #3b3c50;
             font-size: 16px;
+            background-color: #2d2e42;
+            color: #ffffff;
         }
         button {
             width: 100%;
             padding: 15px;
-            background-color: #00796b;
+            background-color: #ff6f61;
             color: white;
             border: none;
             border-radius: 10px;
@@ -80,17 +82,17 @@
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
         button:hover {
-            background-color: #004d40;
+            background-color: #ff3f31;
             transform: scale(1.05);
         }
         .results {
             margin-top: 30px;
             padding: 20px;
-            background-color: #e8f5e9;
+            background-color: #383951;
             border-radius: 10px;
             font-size: 18px;
             line-height: 1.6;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
         }
         .results p {
             margin: 10px 0;
@@ -98,8 +100,8 @@
         footer {
             text-align: center;
             padding: 15px;
-            background-color: #004d40;
-            color: white;
+            background-color: #2d2e42;
+            color: #777;
             font-size: 14px;
         }
         .graph-container {
@@ -116,8 +118,8 @@
 <body>
     <div class="app-container">
         <div class="header">
-            <h1>HealthPro 3.0</h1>
-            <p>Fremtidens Sundhedsassistent</p>
+            <h1>HealthPro X</h1>
+            <p>Fremtidens Sundhedsteknologi</p>
         </div>
         <div class="nav-bar">
             <a href="#">Home</a>
@@ -154,7 +156,7 @@
             </div>
         </div>
         <footer>
-            © 2024 HealthPro. Alle rettigheder forbeholdt.
+            © 2024 HealthPro X. Alle rettigheder forbeholdt.
         </footer>
     </div>
 
@@ -230,12 +232,12 @@
                     datasets: [{
                         label: 'Dagens Sundhedsstatus',
                         data: [heartrate, steps, sleep, calories],
-                        backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                        borderColor: '#007bff',
-                        pointBackgroundColor: '#007bff',
+                        backgroundColor: 'rgba(255, 111, 97, 0.2)',
+                        borderColor: '#ff6f61',
+                        pointBackgroundColor: '#ff6f61',
                         pointBorderColor: '#fff',
                         pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: '#007bff'
+                        pointHoverBorderColor: '#ff6f61'
                     }]
                 },
                 options: {
