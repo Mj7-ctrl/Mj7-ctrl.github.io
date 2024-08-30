@@ -3,53 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Healthcare App</title>
+    <title>HealthPro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Roboto', sans-serif;
+            background-color: #e0f7fa;
+            color: #333;
             margin: 0;
             padding: 20px;
         }
         .container {
-            max-width: 600px;
+            max-width: 700px;
             margin: auto;
-            background: white;
+            background: #ffffff;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #00796b;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 20px;
         }
         input[type="number"], input[type="text"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ddd;
+            border-radius: 8px;
+            border: 1px solid #b0bec5;
+            font-size: 16px;
         }
         button {
             width: 100%;
-            padding: 10px;
-            background-color: #007bff;
+            padding: 15px;
+            background-color: #00796b;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #004d40;
         }
         .results {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #b2dfdb;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .results p {
+            margin: 10px 0;
+        }
+        .icon {
+            font-size: 50px;
+            color: #00796b;
+            display: block;
+            text-align: center;
             margin-top: 20px;
-            padding: 10px;
-            background-color: #e9ecef;
-            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Advanced Health Checker</h2>
+        <h1>HealthPro</h1>
+        <p class="icon">💪</p>
         <label for="heartrate">Puls (bpm):</label>
         <input type="number" id="heartrate" placeholder="Indtast din puls">
         
@@ -64,7 +90,10 @@
 
         <label for="hydration">Vandindtag (ml):</label>
         <input type="number" id="hydration" placeholder="Indtast dit vandindtag i ml">
-        
+
+        <label for="calories">Kalorieindtag (kcal):</label>
+        <input type="number" id="calories" placeholder="Indtast dit kalorieindtag">
+
         <button onclick="analyzeHealth()">Analyser min sundhed</button>
         
         <div class="results" id="results">
@@ -79,38 +108,45 @@
             const weight = parseInt(document.getElementById('weight').value);
             const sleep = parseInt(document.getElementById('sleep').value);
             const hydration = parseInt(document.getElementById('hydration').value);
+            const calories = parseInt(document.getElementById('calories').value);
             let results = [];
 
             if (heartrate > 100) {
-                results.push("Advarsel: Din puls er høj. Overvej at tage en pause.");
+                results.push("⚠️ Din puls er høj. Overvej at tage en pause og slappe af.");
             } else if (heartrate < 60) {
-                results.push("Din puls er lav. Overvej at være mere aktiv.");
+                results.push("⚠️ Din puls er lav. Måske er du meget afslappet, men vær opmærksom.");
             } else {
-                results.push("Din puls er inden for det normale interval.");
+                results.push("✔️ Din puls er inden for det normale interval.");
             }
 
             if (steps < 5000) {
-                results.push("Du har gået mindre end 5000 skridt i dag. Prøv at være mere aktiv.");
+                results.push("👟 Du har gået mindre end 5000 skridt i dag. Prøv at være mere aktiv.");
             } else {
-                results.push("Godt gået! Du har nået et sundt antal skridt i dag.");
+                results.push("✔️ Godt gået! Du har nået et sundt antal skridt i dag.");
             }
 
             if (weight < 50 || weight > 100) {
-                results.push("Din vægt ligger uden for det anbefalede interval. Overvej at tale med en læge.");
+                results.push("⚖️ Din vægt ligger uden for det anbefalede interval. Overvej at tale med en læge.");
             } else {
-                results.push("Din vægt er inden for det anbefalede interval.");
+                results.push("✔️ Din vægt er inden for det anbefalede interval.");
             }
 
             if (sleep < 7) {
-                results.push("Du har sovet mindre end 7 timer. Prøv at få mere søvn.");
+                results.push("😴 Du har sovet mindre end 7 timer. Prøv at få mere søvn.");
             } else {
-                results.push("God søvnrytme! Du har sovet godt.");
+                results.push("✔️ God søvnrytme! Du har sovet godt.");
             }
 
             if (hydration < 2000) {
-                results.push("Du har indtaget mindre end 2 liter vand i dag. Sørg for at drikke mere.");
+                results.push("💧 Du har indtaget mindre end 2 liter vand i dag. Sørg for at drikke mere.");
             } else {
-                results.push("Godt gået! Du har drukket tilstrækkeligt med vand i dag.");
+                results.push("✔️ Godt gået! Du har drukket tilstrækkeligt med vand i dag.");
+            }
+
+            if (calories > 2500) {
+                results.push("🍔 Du har indtaget mange kalorier i dag. Prøv at balancere dit måltid.");
+            } else {
+                results.push("✔️ Dit kalorieindtag er inden for det sunde område.");
             }
 
             document.getElementById('results').innerHTML = results.map(result => `<p>${result}</p>`).join('');
