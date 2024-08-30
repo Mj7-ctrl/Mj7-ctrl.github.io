@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HealthPro 2.0 - Fremtidens Sundhedsapp</title>
+    <title>HealthPro 3.0 - Fremtidens Sundhedsassistent</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -102,12 +102,21 @@
             color: white;
             font-size: 14px;
         }
+        .graph-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        canvas {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+        }
     </style>
 </head>
 <body>
     <div class="app-container">
         <div class="header">
-            <h1>HealthPro 2.0</h1>
+            <h1>HealthPro 3.0</h1>
             <p>Fremtidens Sundhedsassistent</p>
         </div>
         <div class="nav-bar">
@@ -139,12 +148,17 @@
             <div class="results" id="results">
                 <!-- Resultaterne vil blive vist her -->
             </div>
+
+            <div class="graph-container">
+                <canvas id="healthChart"></canvas>
+            </div>
         </div>
         <footer>
             © 2024 HealthPro. Alle rettigheder forbeholdt.
         </footer>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         function analyzeHealth() {
             const heartrate = parseInt(document.getElementById('heartrate').value);
@@ -204,6 +218,35 @@
             }
 
             document.getElementById('results').innerHTML = results.map(result => `<p>${result}</p>`).join('');
+            generateHealthChart(heartrate, steps, sleep, calories);
+        }
+
+        function generateHealthChart(heartrate, steps, sleep, calories) {
+            const ctx = document.getElementById('healthChart').getContext('2d');
+            const healthChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Puls', 'Skridt', 'Søvn', 'Kalorier'],
+                    datasets: [{
+                        label: 'Dagens Sundhedsstatus',
+                        data: [heartrate, steps, sleep, calories],
+                        backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                        borderColor: '#007bff',
+                        pointBackgroundColor: '#007bff',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#007bff'
+                    }]
+                },
+                options: {
+                    scale: {
+                        ticks: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
         }
     </script>
 </body>
