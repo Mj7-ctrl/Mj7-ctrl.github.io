@@ -3,12 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Test Page</title>
+    <title>Advanced Healthcare App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    <p>This is a simple test page to ensure GitHub Pages is working.</p>
+    <div class="container">
+        <h2>Advanced Health Checker</h2>
+        <label for="heartrate">Puls (bpm):</label>
+        <input type="number" id="heartrate" placeholder="Indtast din puls">
+        
+        <label for="steps">Antal skridt i dag:</label>
+        <input type="number" id="steps" placeholder="Indtast antal skridt i dag">
+
+        <label for="weight">Vægt (kg):</label>
+        <input type="number" id="weight" placeholder="Indtast din vægt i kg">
+
+        <label for="sleep">Søvn i timer:</label>
+        <input type="number" id="sleep" placeholder="Indtast antal timer du har sovet">
+
+        <label for="hydration">Vandindtag (ml):</label>
+        <input type="number" id="hydration" placeholder="Indtast dit vandindtag i ml">
+        
+        <button onclick="analyzeHealth()">Analyser min sundhed</button>
+        
+        <div class="results" id="results">
+            <!-- Resultaterne vil blive vist her -->
+        </div>
+    </div>
+
+    <script>
+        function analyzeHealth() {
+            const heartrate = parseInt(document.getElementById('heartrate').value);
+            const steps = parseInt(document.getElementById('steps').value);
+            const weight = parseInt(document.getElementById('weight').value);
+            const sleep = parseInt(document.getElementById('sleep').value);
+            const hydration = parseInt(document.getElementById('hydration').value);
+            let results = [];
+
+            if (heartrate > 100) {
+                results.push("Advarsel: Din puls er høj. Overvej at tage en pause.");
+            } else if (heartrate < 60) {
+                results.push("Din puls er lav. Overvej at være mere aktiv.");
+            } else {
+                results.push("Din puls er inden for det normale interval.");
+            }
+
+            if (steps < 5000) {
+                results.push("Du har gået mindre end 5000 skridt i dag. Prøv at være mere aktiv.");
+            } else {
+                results.push("Godt gået! Du har nået et sundt antal skridt i dag.");
+            }
+
+            if (weight < 50 || weight > 100) {
+                results.push("Din vægt ligger uden for det anbefalede interval. Overvej at tale med en læge.");
+            } else {
+                results.push("Din vægt er inden for det anbefalede interval.");
+            }
+
+            if (sleep < 7) {
+                results.push("Du har sovet mindre end 7 timer. Prøv at få mere søvn.");
+            } else {
+                results.push("God søvnrytme! Du har sovet godt.");
+            }
+
+            if (hydration < 2000) {
+                results.push("Du har indtaget mindre end 2 liter vand i dag. Sørg for at drikke mere.");
+            } else {
+                results.push("Godt gået! Du har drukket tilstrækkeligt med vand i dag.");
+            }
+
+            document.getElementById('results').innerHTML = results.map(result => `<p>${result}</p>`).join('');
+        }
+    </script>
 </body>
 </html>
-	◦	
-
