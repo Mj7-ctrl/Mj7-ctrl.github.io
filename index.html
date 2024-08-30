@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HealthPro</title>
+    <title>HealthPro - Sygdomsdetektion</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -74,7 +74,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>HealthPro</h1>
+        <h1>HealthPro - Sygdomsdetektion</h1>
         <p class="icon">💪</p>
         <label for="heartrate">Puls (bpm):</label>
         <input type="number" id="heartrate" placeholder="Indtast din puls">
@@ -93,7 +93,7 @@
 
         <label for="calories">Kalorieindtag (kcal):</label>
         <input type="number" id="calories" placeholder="Indtast dit kalorieindtag">
-
+        
         <button onclick="analyzeHealth()">Analyser min sundhed</button>
         
         <div class="results" id="results">
@@ -111,6 +111,7 @@
             const calories = parseInt(document.getElementById('calories').value);
             let results = [];
 
+            // Simple health checks
             if (heartrate > 100) {
                 results.push("⚠️ Din puls er høj. Overvej at tage en pause og slappe af.");
             } else if (heartrate < 60) {
@@ -147,6 +148,15 @@
                 results.push("🍔 Du har indtaget mange kalorier i dag. Prøv at balancere dit måltid.");
             } else {
                 results.push("✔️ Dit kalorieindtag er inden for det sunde område.");
+            }
+
+            // Simple disease detection
+            if (heartrate > 100 && steps < 3000 && sleep < 5) {
+                results.push("⚠️ Du viser tegn på stress eller udmattelse. Overvej at tale med en sundhedsperson.");
+            }
+
+            if (weight > 100 && calories > 3000 && steps < 3000) {
+                results.push("⚠️ Kombinationen af høj vægt, højt kalorieindtag, og lav aktivitet kan øge risikoen for livsstilssygdomme. Overvej at justere din kost og aktivitet.");
             }
 
             document.getElementById('results').innerHTML = results.map(result => `<p>${result}</p>`).join('');
