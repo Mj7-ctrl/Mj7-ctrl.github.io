@@ -1,209 +1,144 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Health Platform Prototype</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 700px;
-            width: 100%;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="number"], input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 18px;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        #result {
-            margin-top: 20px;
-            font-size: 16px;
-        }
-        .chart-container {
-            margin-top: 20px;
-            width: 100%;
-            height: 300px;
-        }
-        canvas {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Advanced Health Platform</h1>
-        <div class="form-group">
-            <label for="heartrate">Puls (bpm):</label>
-            <input type="number" id="heartrate" placeholder="Indtast din puls">
-        </div>
-        <div class="form-group">
-            <label for="steps">Antal skridt i dag:</label>
-            <input type="number" id="steps" placeholder="Indtast antal skridt">
-        </div>
-        <div class="form-group">
-            <label for="sleep">Søvntimer i nat:</label>
-            <input type="number" id="sleep" placeholder="Indtast søvntimer">
-        </div>
-        <div class="form-group">
-            <label for="weight">Vægt (kg):</label>
-            <input type="number" id="weight" placeholder="Indtast din vægt">
-        </div>
-        <div class="form-group">
-            <label for="hydration">Vandindtag (ml):</label>
-            <input type="number" id="hydration" placeholder="Indtast vandindtag i dag">
-        </div>
-        <button onclick="analyzeHealth()">Analyser mit helbred</button>
-        <div id="result"></div>
-        <div class="chart-container">
-            <canvas id="healthChart"></canvas>
-        </div>
-    </div>
+import React, { useState } from 'react';
+import { SafeAreaView, ScrollView, View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        function analyzeHealth() {
-            let heartrate = document.getElementById('heartrate').value;
-            let steps = document.getElementById('steps').value;
-            let sleep = document.getElementById('sleep').value;
-            let weight = document.getElementById('weight').value;
-            let hydration = document.getElementById('hydration').value;
-            let result = document.getElementById('result');
+const App = () => {
+  const [heartrate, setHeartrate] = useState('');
+  const [steps, setSteps] = useState('');
+  const [sleep, setSleep] = useState('');
+  const [weight, setWeight] = useState('');
+  const [hydration, setHydration] = useState('');
+  const [results, setResults] = useState([]);
 
-            let warnings = [];
-            let healthData = [];
+  const analyzeHealth = () => {
+    const newResults = [];
 
-            if (heartrate) {
-                if (heartrate > 100) {
-                    warnings.push("Advarsel: Din puls er høj. Overvej at tage en pause og slappe af.");
-                } else if (heartrate < 60) {
-                    warnings.push("Din puls er lavere end normalt. Sørg for at du er hydreret og spis godt.");
-                } else {
-                    warnings.push("Din puls er inden for et normalt interval. Godt gået!");
-                }
-                healthData.push({ label: 'Puls', value: heartrate });
-            } else {
-                warnings.push("Pulsdata mangler.");
-            }
+    if (heartrate > 100) {
+      newResults.push("Advarsel: Din puls er høj. Overvej at tage en pause.");
+    } else if (heartrate < 60) {
+      newResults.push("Din puls er lavere end normalt. Sørg for at du er hydreret.");
+    } else {
+      newResults.push("Din puls er inden for et normalt interval.");
+    }
 
-            if (steps) {
-                if (steps < 5000) {
-                    warnings.push("Du har gået mindre end 5000 skridt i dag. Prøv at være mere aktiv.");
-                } else {
-                    warnings.push("Godt gået! Du har nået et sundt antal skridt i dag.");
-                }
-                healthData.push({ label: 'Skridt', value: steps });
-            } else {
-                warnings.push("Skridttælling mangler.");
-            }
+    if (steps < 5000) {
+      newResults.push("Du har gået mindre end 5000 skridt i dag. Prøv at være mere aktiv.");
+    } else {
+      newResults.push("Godt gået! Du har nået et sundt antal skridt i dag.");
+    }
 
-            if (sleep) {
-                if (sleep < 7) {
-                    warnings.push("Du har sovet mindre end 7 timer. Prøv at få mere søvn for optimal sundhed.");
-                } else {
-                    warnings.push("God søvnrytme! Du har sovet godt.");
-                }
-                healthData.push({ label: 'Søvn', value: sleep });
-            } else {
-                warnings.push("Søvndata mangler.");
-            }
+    if (sleep < 7) {
+      newResults.push("Du har sovet mindre end 7 timer. Prøv at få mere søvn.");
+    } else {
+      newResults.push("God søvnrytme! Du har sovet godt.");
+    }
 
-            if (weight) {
-                if (weight < 50 || weight > 100) {
-                    warnings.push("Din vægt ligger uden for det anbefalede interval. Konsulter en sundhedsekspert.");
-                } else {
-                    warnings.push("Din vægt er inden for det anbefalede interval.");
-                }
-                healthData.push({ label: 'Vægt', value: weight });
-            } else {
-                warnings.push("Vægtdata mangler.");
-            }
+    if (weight < 50 || weight > 100) {
+      newResults.push("Din vægt ligger uden for det anbefalede interval.");
+    } else {
+      newResults.push("Din vægt er inden for det anbefalede interval.");
+    }
 
-            if (hydration) {
-                if (hydration < 2000) {
-                    warnings.push("Du har indtaget mindre end 2 liter vand i dag. Sørg for at drikke mere.");
-                } else {
-                    warnings.push("Godt gået! Du har drukket tilstrækkeligt med vand i dag.");
-                }
-                healthData.push({ label: 'Vandindtag', value: hydration });
-            } else {
-                warnings.push("Vandindtagsdata mangler.");
-            }
+    if (hydration < 2000) {
+      newResults.push("Du har indtaget mindre end 2 liter vand i dag. Sørg for at drikke mere.");
+    } else {
+      newResults.push("Godt gået! Du har drukket tilstrækkeligt med vand i dag.");
+    }
 
-            result.innerHTML = warnings.map(warning => `<p style="color:red;">${warning}</p>`).join('');
+    setResults(newResults);
+  };
 
-            // Update the chart
-            updateChart(healthData);
-        }
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Puls (bpm):</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            value={heartrate}
+            onChangeText={setHeartrate}
+            placeholder="Indtast din puls"
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Antal skridt i dag:</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            value={steps}
+            onChangeText={setSteps}
+            placeholder="Indtast antal skridt"
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Søvntimer i nat:</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            value={sleep}
+            onChangeText={setSleep}
+            placeholder="Indtast søvntimer"
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Vægt (kg):</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            value={weight}
+            onChangeText={setWeight}
+            placeholder="Indtast din vægt"
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Vandindtag (ml):</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            value={hydration}
+            onChangeText={setHydration}
+            placeholder="Indtast vandindtag i dag"
+          />
+        </View>
+        <Button title="Analyser mit helbred" onPress={analyzeHealth} />
+        <View style={styles.resultsContainer}>
+          {results.map((result, index) => (
+            <Text key={index} style={styles.resultText}>{result}</Text>
+          ))}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
-        function updateChart(healthData) {
-            const ctx = document.getElementById('healthChart').getContext('2d');
-            const labels = healthData.map(data => data.label);
-            const dataValues = healthData.map(data => data.value);
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f4f4f4',
+    padding: 20,
+  },
+  inputContainer: {
+    marginBottom: 15,
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  input: {
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 4,
+    borderColor: '#ddd',
+    borderWidth: 1,
+    fontSize: 16,
+  },
+  resultsContainer: {
+    marginTop: 20,
+  },
+  resultText: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+});
 
-            new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Sundhedsdata',
-                        data: dataValues,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-                    }]
-                },
-                options: {
-                    scales: {
-                        r: {
-                            beginAtZero: true,
-                            max: 100,
-                        }
-                    }
-                }
-            });
-        }
-    </script>
-</body>
-</html>
+export default App;
