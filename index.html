@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Avanceret hjemmeside med interaktive elementer og funktioner.">
-    <title>Professionel Platform</title>
+    <meta name="description" content="Professionel platform med interaktive elementer.">
+    <title>Din Bedste Platform</title>
 
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8506740750820089" crossorigin="anonymous"></script>
@@ -55,7 +55,7 @@
 
         /* Hero Section */
         header {
-            background-image: url('https://via.placeholder.com/1920x800');
+            background-image: url('https://source.unsplash.com/1920x1080/?nature,technology');
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -210,6 +210,45 @@
             background-color: #45a049;
         }
 
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 60px 20px;
+            background-color: #f0f2f5;
+            text-align: center;
+        }
+
+        .testimonials-section h2 {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin-bottom: 40px;
+        }
+
+        .testimonials-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .testimonial-item {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+        }
+
+        .testimonial-item p {
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .testimonial-item h4 {
+            font-size: 1.3rem;
+            color: #4CAF50;
+            margin-top: 20px;
+        }
+
         /* Contact Section */
         .contact-section {
             padding: 60px 20px;
@@ -306,9 +345,9 @@
 
 <!-- Hero Section -->
 <header id="home">
-    <h1>Velkommen til Din Online Platform</h1>
-    <p>Oplev en verden af fantastiske services og produkter</p>
-    <button>Læs Mere</button>
+    <h1>Din professionelle platform</h1>
+    <p>Oplev fantastiske produkter og tjenester</p>
+    <button onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'});">Læs Mere</button>
 </header>
 
 <!-- Om os Sektion -->
@@ -317,8 +356,82 @@
     <p>Vi er en virksomhed, der leverer de bedste tjenester og produkter til vores kunder. Vores mission er at hjælpe dig med at finde de bedste løsninger, uanset hvad du leder efter.</p>
 </section>
 
-<!-- Service Sektion -->
+<!-- Services Section -->
 <section class="service-section" id="services">
     <h2>Vores Tjenester</h2>
     <div class="service-cards">
         <div class="service-card">
+            <img src="https://source.unsplash.com/100x100/?service" alt="Service 1">
+            <h3>Service 1</h3>
+            <p>Vi tilbyder den bedste service inden for teknologi og design.</p>
+        </div>
+        <div class="service-card">
+            <img src="https://source.unsplash.com/100x100/?business" alt="Service 2">
+            <h3>Service 2</h3>
+            <p>Vores forretningstjenester hjælper din virksomhed med at vokse.</p>
+        </div>
+        <div class="service-card">
+            <img src="https://source.unsplash.com/100x100/?consulting" alt="Service 3">
+            <h3>Service 3</h3>
+            <p>Få ekspertrådgivning fra vores team af erfarne konsulenter.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section" id="testimonials">
+    <h2>Hvad vores kunder siger</h2>
+    <div class="testimonials-grid">
+        <div class="testimonial-item">
+            <p>"Den bedste oplevelse, jeg nogensinde har haft. Jeg vil stærkt anbefale dem til alle!"</p>
+            <h4>- Kunde 1</h4>
+        </div>
+        <div class="testimonial-item">
+            <p>"Fantastisk service og produkter. De forstår virkelig, hvad kunderne har brug for."</p>
+            <h4>- Kunde 2</h4>
+        </div>
+        <div class="testimonial-item">
+            <p>"De leverede præcis det, vi havde brug for, og endda mere. Utroligt team!"</p>
+            <h4>- Kunde 3</h4>
+        </div>
+    </div>
+</section>
+
+<!-- Produkt-sektion -->
+<section class="product-section" id="products">
+    <h2>Produkter</h2>
+    <div class="product-grid">
+        <div class="product-item">
+            <img src="https://source.unsplash.com/300x200/?product" alt="Produkt 1">
+            <a href="#">Køb Produkt 1</a>
+        </div>
+        <div class="product-item">
+            <img src="https://source.unsplash.com/300x200/?gadget" alt="Produkt 2">
+            <a href="#">Køb Produkt 2</a>
+        </div>
+        <div class="product-item">
+            <img src="https://source.unsplash.com/300x200/?innovation" alt="Produkt 3">
+            <a href="#">Køb Produkt 3</a>
+        </div>
+    </div>
+</section>
+
+<!-- Kontakt-sektion -->
+<section class="contact-section" id="contact">
+    <h2>Kontakt os</h2>
+    <form>
+        <input type="text" name="name" placeholder="Dit navn" required>
+        <input type="email" name="email" placeholder="Din e-mail" required>
+        <textarea name="message" rows="5" placeholder="Din besked" required></textarea>
+        <button type="submit">Send besked</button>
+    </form>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Din Bedste Platform. Alle rettigheder forbeholdes.</p>
+    <p><a href="#home">Tilbage til toppen</a></p>
+</footer>
+
+</body>
+</html>
