@@ -3,53 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Avanceret og professionel hjemmeside med fuld funktionalitet">
-    <title>Din Professionelle Platform</title>
+    <meta name="description" content="Avanceret hjemmeside med interaktive elementer og funktioner.">
+    <title>Professionel Platform</title>
 
-    <!-- Google AdSense Script -->
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8506740750820089" crossorigin="anonymous"></script>
 
-    <!-- Moderne CSS styling -->
+    <!-- CSS styling -->
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f9;
             color: #333;
         }
-        /* Navigation styling */
+
+        /* Fast Navigation Bar */
         nav {
             background-color: #333;
             padding: 15px;
             position: fixed;
-            width: 100%;
             top: 0;
+            width: 100%;
             z-index: 10;
         }
+
         nav ul {
             list-style-type: none;
             text-align: center;
         }
+
         nav ul li {
             display: inline;
             margin: 0 15px;
         }
+
         nav ul li a {
             color: white;
             text-decoration: none;
             font-size: 1.2rem;
         }
+
         nav ul li a:hover {
             color: #4CAF50;
         }
 
-        /* Header section styling */
+        /* Hero Section */
         header {
-            background-image: url('https://via.placeholder.com/1920x800'); /* Udskift med et relevant billede */
+            background-image: url('https://via.placeholder.com/1920x800');
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -61,15 +67,18 @@
             color: white;
             position: relative;
         }
+
         header h1 {
             font-size: 4rem;
             z-index: 2;
         }
+
         header p {
             font-size: 1.5rem;
             margin-top: 20px;
             z-index: 2;
         }
+
         header button {
             padding: 10px 20px;
             background-color: #4CAF50;
@@ -79,21 +88,24 @@
             margin-top: 30px;
             cursor: pointer;
         }
+
         header button:hover {
             background-color: #45a049;
         }
 
-        /* About section */
+        /* About Section */
         .about-section {
             padding: 60px 20px;
             background-color: #fff;
             text-align: center;
         }
+
         .about-section h2 {
             font-size: 2.5rem;
             color: #4CAF50;
             margin-bottom: 40px;
         }
+
         .about-section p {
             font-size: 1.2rem;
             line-height: 1.8;
@@ -102,22 +114,25 @@
             margin: 0 auto;
         }
 
-        /* Service section */
+        /* Service Section */
         .service-section {
             padding: 60px 20px;
             background-color: #f9f9f9;
             text-align: center;
         }
+
         .service-section h2 {
             font-size: 2.5rem;
             color: #333;
             margin-bottom: 40px;
         }
+
         .service-cards {
             display: flex;
             justify-content: center;
             gap: 30px;
         }
+
         .service-card {
             background-color: white;
             border-radius: 10px;
@@ -126,37 +141,43 @@
             max-width: 300px;
             text-align: center;
         }
+
         .service-card img {
             width: 100px;
             margin-bottom: 20px;
         }
+
         .service-card h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
             color: #4CAF50;
         }
+
         .service-card p {
             font-size: 1rem;
             color: #666;
         }
 
-        /* Product section with images */
+        /* Produkt-sektion */
         .product-section {
             padding: 60px 20px;
             background-color: #fff;
             text-align: center;
         }
+
         .product-section h2 {
             font-size: 2.5rem;
             color: #333;
             margin-bottom: 40px;
         }
+
         .product-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
             justify-content: center;
         }
+
         .product-item {
             background-color: white;
             border-radius: 10px;
@@ -165,13 +186,16 @@
             overflow: hidden;
             transition: transform 0.3s ease-in-out;
         }
+
         .product-item:hover {
             transform: translateY(-10px);
         }
+
         .product-item img {
             width: 100%;
             border-bottom: 4px solid #4CAF50;
         }
+
         .product-item a {
             display: block;
             padding: 20px;
@@ -181,26 +205,30 @@
             font-weight: bold;
             text-align: center;
         }
+
         .product-item a:hover {
             background-color: #45a049;
         }
 
-        /* Contact section */
+        /* Contact Section */
         .contact-section {
             padding: 60px 20px;
             background-color: #f9f9f9;
             text-align: center;
         }
+
         .contact-section h2 {
             font-size: 2.5rem;
             color: #4CAF50;
             margin-bottom: 40px;
         }
+
         .contact-section form {
             max-width: 600px;
             margin: 0 auto;
             text-align: left;
         }
+
         .contact-section form input, .contact-section form textarea {
             width: 100%;
             padding: 15px;
@@ -209,6 +237,7 @@
             border: 1px solid #ccc;
             font-size: 1rem;
         }
+
         .contact-section form button {
             padding: 15px 30px;
             background-color: #4CAF50;
@@ -218,37 +247,43 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .contact-section form button:hover {
             background-color: #45a049;
         }
 
-        /* Footer styling */
+        /* Footer */
         footer {
             background-color: #333;
             color: white;
             padding: 40px 20px;
             text-align: center;
         }
+
         footer p {
             font-size: 1.1rem;
             margin-bottom: 10px;
         }
+
         footer a {
             color: #4CAF50;
             text-decoration: none;
         }
+
         footer a:hover {
             text-decoration: underline;
         }
 
-        /* Responsive styling */
+        /* Responsive */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 3rem;
             }
+
             header p {
                 font-size: 1.2rem;
             }
+
             .service-cards, .product-grid {
                 flex-direction: column;
                 align-items: center;
@@ -258,7 +293,7 @@
 </head>
 <body>
 
-<!-- Fixed Navigation -->
+<!-- Fast Navigation -->
 <nav>
     <ul>
         <li><a href="#home">Hjem</a></li>
@@ -276,11 +311,14 @@
     <button>Læs Mere</button>
 </header>
 
-<!-- About Section -->
+<!-- Om os Sektion -->
 <section class="about-section" id="about">
     <h2>Om os</h2>
     <p>Vi er en virksomhed, der leverer de bedste tjenester og produkter til vores kunder. Vores mission er at hjælpe dig med at finde de bedste løsninger, uanset hvad du leder efter.</p>
 </section>
 
-<!-- Services Section -->
-<section class="
+<!-- Service Sektion -->
+<section class="service-section" id="services">
+    <h2>Vores Tjenester</h2>
+    <div class="service-cards">
+        <div class="service-card">
