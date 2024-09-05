@@ -1,256 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HealthPro X - Din Fremtidige Sundhedspartner</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="description" content="En hjemmeside for affiliate marketing og reklameindtægter">
+    <title>Tjen penge online - Din Affiliate Side</title>
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #1e1e2f;
-            color: #ffffff;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            background-color: #f4f4f4;
         }
-        .app-container {
-            background: #28293d;
-            width: 90%;
-            max-width: 400px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-        }
-        .header {
-            background-color: #3b3c50;
+        header {
+            background-color: #4CAF50;
             padding: 20px;
             text-align: center;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #ff6f61;
-        }
-        .nav-bar {
-            display: flex;
-            justify-content: space-around;
-            background-color: #2d2e42;
-            padding: 10px 0;
-        }
-        .nav-bar a {
-            text-decoration: none;
-            color: #ffffff;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-        .nav-bar a:hover {
-            color: #ff6f61;
-        }
-        .content {
-            padding: 15px;
-        }
-        label {
-            font-weight: bold;
-            display: block;
-            margin-top: 15px;
-            color: #ff6f61;
-            font-size: 14px;
-        }
-        input[type="number"], input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 8px;
-            border: 1px solid #3b3c50;
-            font-size: 16px;
-            background-color: #2d2e42;
-            color: #ffffff;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #ff6f61;
             color: white;
-            border: none;
+        }
+        nav {
+            margin: 20px;
+            text-align: center;
+        }
+        nav a {
+            margin: 10px;
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
             border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 15px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        button:hover {
-            background-color: #ff3f31;
-            transform: scale(1.05);
-        }
-        .results {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #383951;
-            border-radius: 10px;
-            font-size: 16px;
-            line-height: 1.6;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-        }
-        .results p {
-            margin: 8px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         footer {
             text-align: center;
-            padding: 10px;
-            background-color: #2d2e42;
-            color: #777;
-            font-size: 12px;
-        }
-        .graph-container {
-            margin-top: 15px;
-            text-align: center;
-        }
-        canvas {
-            width: 100%;
-            max-width: 350px;
-            height: auto;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <div class="header">
-            <h1>HealthPro X</h1>
-            <p>Din Fremtidige Sundhedspartner</p>
-        </div>
-        <div class="nav-bar">
-            <a href="#">Home</a>
-            <a href="#">Profil</a>
-            <a href="#">Indstillinger</a>
-        </div>
-        <div class="content">
-            <label for="heartrate">Puls (bpm):</label>
-            <input type="number" id="heartrate" placeholder="Indtast din puls">
-            
-            <label for="steps">Antal skridt i dag:</label>
-            <input type="number" id="steps" placeholder="Indtast antal skridt i dag">
-    
-            <label for="weight">Vægt (kg):</label>
-            <input type="number" id="weight" placeholder="Indtast din vægt i kg">
-    
-            <label for="sleep">Søvn i timer:</label>
-            <input type="number" id="sleep" placeholder="Indtast antal timer du har sovet">
-    
-            <label for="hydration">Vandindtag (ml):</label>
-            <input type="number" id="hydration" placeholder="Indtast dit vandindtag i ml">
-    
-            <label for="calories">Kalorieindtag (kcal):</label>
-            <input type="number" id="calories" placeholder="Indtast dit kalorieindtag">
-            
-            <button onclick="analyzeHealth()">Analyser min sundhed</button>
-            
-            <div class="results" id="results">
-                <!-- Resultaterne vil blive vist her -->
-            </div>
 
-            <div class="graph-container">
-                <canvas id="healthChart"></canvas>
-            </div>
-        </div>
-        <footer>
-            © 2024 HealthPro X. Alle rettigheder forbeholdt.
-        </footer>
-    </div>
+<header>
+    <h1>Velkommen til Din Affiliate Side</h1>
+    <p>Tjen penge online med affiliate marketing og reklamer</p>
+</header>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        function analyzeHealth() {
-            const heartrate = parseInt(document.getElementById('heartrate').value);
-            const steps = parseInt(document.getElementById('steps').value);
-            const weight = parseInt(document.getElementById('weight').value);
-            const sleep = parseInt(document.getElementById('sleep').value);
-            const hydration = parseInt(document.getElementById('hydration').value);
-            const calories = parseInt(document.getElementById('calories').value);
-            let results = [];
+<nav>
+    <a href="#affiliate">Affiliate Links</a>
+    <a href="#ads">Reklamer</a>
+    <a href="#contact">Kontakt</a>
+</nav>
 
-            // Simple health checks
-            if (heartrate > 100) {
-                results.push("⚠️ Din puls er høj. Overvej at tage en pause og slappe af.");
-            } else if (heartrate < 60) {
-                results.push("⚠️ Din puls er lav. Måske er du meget afslappet, men vær opmærksom.");
-            } else {
-                results.push("✔️ Din puls er inden for det normale interval.");
-            }
+<section id="affiliate">
+    <h2>Affiliate Links</h2>
+    <p>Her er nogle produkter, som du kan købe:</p>
+    <ul>
+        <li><a href="https://www.amazon.com/example-affiliate-link">Produkt 1</a></li>
+        <li><a href="https://www.amazon.com/example-affiliate-link">Produkt 2</a></li>
+        <li><a href="https://www.amazon.com/example-affiliate-link">Produkt 3</a></li>
+    </ul>
+</section>
 
-            if (steps < 5000) {
-                results.push("👟 Du har gået mindre end 5000 skridt i dag. Prøv at være mere aktiv.");
-            } else {
-                results.push("✔️ Godt gået! Du har nået et sundt antal skridt i dag.");
-            }
+<section id="ads">
+    <h2>Reklamer</h2>
+    <p>Her kunne dine Google AdSense reklamer vises</p>
+    <!-- Google AdSense kode vil blive indsat her -->
+</section>
 
-            if (weight < 50 || weight > 100) {
-                results.push("⚖️ Din vægt ligger uden for det anbefalede interval. Overvej at tale med en læge.");
-            } else {
-                results.push("✔️ Din vægt er inden for det anbefalede interval.");
-            }
+<section id="contact">
+    <h2>Kontakt</h2>
+    <p>Har du spørgsmål, så kontakt os via e-mail: <a href="mailto:email@example.com">email@example.com</a></p>
+</section>
 
-            if (sleep < 7) {
-                results.push("😴 Du har sovet mindre end 7 timer. Prøv at få mere søvn.");
-            } else {
-                results.push("✔️ God søvnrytme! Du har sovet godt.");
-            }
+<footer>
+    <p>&copy; 2024 Din Affiliate Side. Alle rettigheder forbeholdes.</p>
+</footer>
 
-            if (hydration < 2000) {
-                results.push("💧 Du har indtaget mindre end 2 liter vand i dag. Sørg for at drikke mere.");
-            } else {
-                results.push("✔️ Godt gået! Du har drukket tilstrækkeligt med vand i dag.");
-            }
-
-            if (calories > 2500) {
-                results.push("🍔 Du har indtaget mange kalorier i dag. Prøv at balancere dit måltid.");
-            } else {
-                results.push("✔️ Dit kalorieindtag er inden for det sunde område.");
-            }
-
-            // Simple disease detection
-            if (heartrate > 100 && steps < 3000 && sleep < 5) {
-                results.push("⚠️ Du viser tegn på stress eller udmattelse. Overvej at tale med en sundhedsperson.");
-            }
-
-            if (weight > 100 && calories > 3000 && steps < 3000) {
-                results.push("⚠️ Kombinationen af høj vægt, højt kalorieindtag, og lav aktivitet kan øge risikoen for livsstilssygdomme. Overvej at justere din kost og aktivitet.");
-            }
-
-            document.getElementById('results').innerHTML = results.map(result => `<p>${result}</p>`).join('');
-            generateHealthChart(heartrate, steps, sleep, calories);
-        }
-
-        function generateHealthChart(heartrate, steps, sleep, calories) {
-            const ctx = document.getElementById('healthChart').getContext('2d');
-            const healthChart = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: ['Puls', 'Skridt', 'Søvn', 'Kalorier'],
-                    datasets: [{
-                        label: 'Dagens Sundhedsstatus',
-                        data: [heartrate, steps, sleep, calories],
-                        backgroundColor: 'rgba(255, 111, 97, 0.2)',
-                        borderColor: '#ff6f61',
-                        pointBackgroundColor: '#ff6f61',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: '#ff6f61'
-                    }]
-                },
-                options: {
-                    scale: {
-                        ticks: {
-                            beginAtZero: true,
-                            max: 100
-                        }
-                    }
-                }
-            });
-        }
-    </script>
 </body>
 </html>
