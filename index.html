@@ -3,29 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Professionel hjemmeside med et moderne design og avancerede funktioner.">
-    <title>Velkommen til Din Online Platform</title>
+    <meta name="description" content="Avanceret og professionel hjemmeside med fuld funktionalitet">
+    <title>Din Professionelle Platform</title>
 
-    <!-- Google AdSense -->
+    <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8506740750820089" crossorigin="anonymous"></script>
 
-    <!-- Moderne CSS-styling -->
+    <!-- Moderne CSS styling -->
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
+            background-color: #f4f4f9;
             color: #333;
+        }
+        /* Navigation styling */
+        nav {
+            background-color: #333;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+        }
+        nav ul {
+            list-style-type: none;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        nav ul li a:hover {
+            color: #4CAF50;
         }
 
         /* Header section styling */
         header {
-            background-image: url('https://via.placeholder.com/1920x800'); /* Udskift billedet med et professionelt */
+            background-image: url('https://via.placeholder.com/1920x800'); /* Udskift med et relevant billede */
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -37,88 +61,102 @@
             color: white;
             position: relative;
         }
-
-        header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
         header h1 {
             font-size: 4rem;
             z-index: 2;
         }
-
         header p {
             font-size: 1.5rem;
             margin-top: 20px;
             z-index: 2;
         }
-
-        /* Navigation styling */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 15px 0;
-            z-index: 10;
-        }
-
-        nav ul {
-            list-style-type: none;
-            text-align: center;
-        }
-
-        nav ul li {
-            display: inline-block;
-            margin: 0 20px;
-        }
-
-        nav ul li a {
+        header button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            border: none;
             color: white;
-            text-decoration: none;
             font-size: 1.2rem;
-            font-weight: bold;
+            margin-top: 30px;
+            cursor: pointer;
+        }
+        header button:hover {
+            background-color: #45a049;
         }
 
-        nav ul li a:hover {
-            color: #4CAF50;
-        }
-
-        /* Section styling */
-        section {
+        /* About section */
+        .about-section {
             padding: 60px 20px;
+            background-color: #fff;
             text-align: center;
-            max-width: 1200px;
+        }
+        .about-section h2 {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin-bottom: 40px;
+        }
+        .about-section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #666;
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        section h2 {
+        /* Service section */
+        .service-section {
+            padding: 60px 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .service-section h2 {
             font-size: 2.5rem;
             color: #333;
             margin-bottom: 40px;
         }
-
-        section p {
-            font-size: 1.2rem;
-            line-height: 1.8;
+        .service-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 300px;
+            text-align: center;
+        }
+        .service-card img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+        .service-card p {
+            font-size: 1rem;
             color: #666;
-            margin-bottom: 40px;
         }
 
-        /* Product grid */
+        /* Product section with images */
+        .product-section {
+            padding: 60px 20px;
+            background-color: #fff;
+            text-align: center;
+        }
+        .product-section h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 40px;
+        }
         .product-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
             justify-content: center;
         }
-
         .product-item {
             background-color: white;
             border-radius: 10px;
@@ -127,16 +165,13 @@
             overflow: hidden;
             transition: transform 0.3s ease-in-out;
         }
-
         .product-item:hover {
             transform: translateY(-10px);
         }
-
         .product-item img {
             width: 100%;
             border-bottom: 4px solid #4CAF50;
         }
-
         .product-item a {
             display: block;
             padding: 20px;
@@ -146,8 +181,44 @@
             font-weight: bold;
             text-align: center;
         }
-
         .product-item a:hover {
+            background-color: #45a049;
+        }
+
+        /* Contact section */
+        .contact-section {
+            padding: 60px 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .contact-section h2 {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin-bottom: 40px;
+        }
+        .contact-section form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .contact-section form input, .contact-section form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+        .contact-section form button {
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .contact-section form button:hover {
             background-color: #45a049;
         }
 
@@ -157,34 +228,28 @@
             color: white;
             padding: 40px 20px;
             text-align: center;
-            margin-top: 50px;
         }
-
         footer p {
             font-size: 1.1rem;
             margin-bottom: 10px;
         }
-
         footer a {
             color: #4CAF50;
             text-decoration: none;
         }
-
         footer a:hover {
             text-decoration: underline;
         }
 
-        /* Responsivt design */
+        /* Responsive styling */
         @media (max-width: 768px) {
             header h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
-
             header p {
                 font-size: 1.2rem;
             }
-
-            .product-grid {
+            .service-cards, .product-grid {
                 flex-direction: column;
                 align-items: center;
             }
@@ -193,67 +258,29 @@
 </head>
 <body>
 
-<!-- Navigation -->
+<!-- Fixed Navigation -->
 <nav>
     <ul>
         <li><a href="#home">Hjem</a></li>
-        <li><a href="#affiliate">Produkter</a></li>
-        <li><a href="#ads">Reklamer</a></li>
+        <li><a href="#about">Om os</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Produkter</a></li>
         <li><a href="#contact">Kontakt</a></li>
     </ul>
 </nav>
 
-<!-- Header / Hero Section -->
+<!-- Hero Section -->
 <header id="home">
     <h1>Velkommen til Din Online Platform</h1>
-    <p>Oplev en verden af unikke produkter og fantastiske tilbud.</p>
+    <p>Oplev en verden af fantastiske services og produkter</p>
+    <button>Læs Mere</button>
 </header>
 
-<!-- Affiliate Products Section -->
-<section id="affiliate">
-    <h2>Produkter vi anbefaler</h2>
-    <div class="product-grid">
-        <div class="product-item">
-            <img src="https://via.placeholder.com/300x200" alt="Produkt 1">
-            <a href="https://www.amazon.com/example-affiliate-link" target="_blank">Køb Produkt 1</a>
-        </div>
-        <div class="product-item">
-            <img src="https://via.placeholder.com/300x200" alt="Produkt 2">
-            <a href="https://www.amazon.com/example-affiliate-link" target="_blank">Køb Produkt 2</a>
-        </div>
-        <div class="product-item">
-            <img src="https://via.placeholder.com/300x200" alt="Produkt 3">
-            <a href="https://www.amazon.com/example-affiliate-link" target="_blank">Køb Produkt 3</a>
-        </div>
-    </div>
+<!-- About Section -->
+<section class="about-section" id="about">
+    <h2>Om os</h2>
+    <p>Vi er en virksomhed, der leverer de bedste tjenester og produkter til vores kunder. Vores mission er at hjælpe dig med at finde de bedste løsninger, uanset hvad du leder efter.</p>
 </section>
 
-<!-- Google Ads Section -->
-<section id="ads">
-    <h2>Reklamer</h2>
-    <!-- Skjult Google AdSense -->
-    <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-8506740750820089"
-        data-ad-slot="7806394673"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</section>
-
-<!-- Kontakt Section -->
-<section id="contact">
-    <h2>Kontakt os</h2>
-    <p>Har du spørgsmål eller samarbejdsmuligheder? Send os en besked via e-mail: <a href="mailto:mikkeljensen2704@hotmail.com">mikkeljensen2704@hotmail.com</a></p>
-</section>
-
-<!-- Footer -->
-<footer>
-    <p>&copy; 2024 Din Online Platform. Alle rettigheder forbeholdes.</p>
-    <p><a href="#home">Tilbage til toppen</a></p>
-</footer>
-
-</body>
-</html>
+<!-- Services Section -->
+<section class="
