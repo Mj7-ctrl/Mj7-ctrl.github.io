@@ -3,83 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Professionel hjemmeside til affiliate marketing og reklamer">
-    <title>Professionel Hjemmeside - Tjen Penge Online</title>
+    <meta name="description" content="Professionel hjemmeside for online markedsføring og produkter.">
+    <title>Velkommen til Din Online Platform</title>
     
-    <!-- Google AdSense Script -->
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8506740750820089" crossorigin="anonymous"></script>
-
-    <!-- Custom CSS for professional layout -->
+    
+    <!-- Custom CSS for advanced design -->
     <style>
+        /* Basic styling */
         body {
-            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            font-family: 'Roboto', sans-serif;
             background-color: #f0f2f5;
             color: #333;
         }
+
+        /* Header styling */
         header {
-            background-color: #4CAF50;
+            background-image: url('https://via.placeholder.com/1920x500'); /* Brug en relevant billed-URL */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
             color: white;
-            padding: 20px;
             text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Mørk overlay for bedre læsbarhed */
+        }
+
         header h1 {
-            margin: 0;
-            font-size: 3em;
+            font-size: 4em;
+            z-index: 2;
         }
+
+        header p {
+            font-size: 1.5em;
+            z-index: 2;
+        }
+
+        /* Navigation */
         nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
             background-color: #333;
-            padding: 15px;
+            padding: 10px;
             text-align: center;
+            z-index: 10;
         }
+
         nav a {
-            margin: 0 15px;
             color: white;
+            margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 1.1em;
+            padding: 10px;
         }
+
         nav a:hover {
-            text-decoration: underline;
-        }
-        main {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-        section {
-            margin-bottom: 40px;
-        }
-        section h2 {
             color: #4CAF50;
-            font-size: 2em;
-            margin-bottom: 10px;
         }
+
+        /* Section styling */
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
         section p {
             font-size: 1.2em;
-            line-height: 1.8;
+            line-height: 1.8em;
         }
+
+        /* Product grid for affiliate section */
         .product-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
+            justify-content: center;
         }
+
         .product-item {
-            flex: 1 1 calc(33.333% - 20px);
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            background-color: white;
+            border-radius: 10px;
             padding: 20px;
-            text-align: center;
+            max-width: 300px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
+
+        .product-item:hover {
+            transform: translateY(-10px);
+        }
+
         .product-item img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
+            width: 100%;
+            border-radius: 10px;
         }
+
         .product-item a {
             display: block;
             margin-top: 10px;
@@ -88,77 +131,106 @@
             color: #4CAF50;
             text-decoration: none;
         }
+
+        .product-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer styling */
         footer {
             background-color: #333;
             color: white;
-            padding: 20px;
+            padding: 40px;
             text-align: center;
-            margin-top: 40px;
         }
+
         footer p {
             margin: 0;
+            font-size: 1.1em;
+        }
+
+        /* Advanced Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        header h1,
+        header p {
+            animation: fadeIn 2s ease-out;
+        }
+
+        .section-content {
+            animation: fadeIn 2s ease-in-out;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Professionel Hjemmeside</h1>
-    <p>Tjen penge online med affiliate marketing og Google AdSense</p>
-</header>
-
+<!-- Fixed Navigation Bar -->
 <nav>
-    <a href="#affiliate">Affiliate Produkter</a>
+    <a href="#home">Hjem</a>
+    <a href="#affiliate">Produkter</a>
     <a href="#ads">Reklamer</a>
     <a href="#contact">Kontakt</a>
 </nav>
 
-<main>
-    <!-- Affiliate Section -->
-    <section id="affiliate">
-        <h2>Affiliate Produkter</h2>
-        <p>Her er nogle anbefalede produkter, som du kan købe gennem vores affiliate-partnere.</p>
-        <div class="product-grid">
-            <div class="product-item">
-                <img src="https://via.placeholder.com/300x200" alt="Produkt 1">
-                <a href="https://www.amazon.com/example-affiliate-link" target="_blank">Køb Produkt 1</a>
-            </div>
-            <div class="product-item">
-                <img src="https://via.placeholder.com/300x200" alt="Produkt 2">
-                <a href="https://www.amazon.com/example-affiliate-link" target="_blank">Køb Produkt 2</a>
-            </div>
-            <div class="product-item">
-                <img src="https://via.placeholder.com/300x200" alt="Produkt 3">
-                <a href="https://www.amazon.com/example-affiliate-link" target="_blank">Køb Produkt 3</a>
-            </div>
+<!-- Hero Header Section -->
+<header id="home">
+    <div class="content">
+        <h1>Velkommen til Din Online Platform</h1>
+        <p>Find de bedste produkter og tilbud her. Tjen penge online!</p>
+    </div>
+</header>
+
+<!-- Affiliate Products Section -->
+<section id="affiliate" class="section-content">
+    <h2>Vores Anbefalede Produkter</h2>
+    <p>Her kan du se nogle af de bedste produkter, vi tilbyder gennem vores affiliate-partnere.</p>
+    <div class="product-grid">
+        <div class="product-item">
+            <img src="https://via.placeholder.com/300x200" alt="Produkt 1">
+            <a href="https://www.amazon.com/example-affiliate-link" target="_blank">Køb Produkt 1</a>
         </div>
-    </section>
+        <div class="product-item">
+            <img src="https://via.placeholder.com/300x200" alt="Produkt 2">
+            <a href="https://www.amazon.com/example-affiliate-link" target="_blank">Køb Produkt 2</a>
+        </div>
+        <div class="product-item">
+            <img src="https://via.placeholder.com/300x200" alt="Produkt 3">
+            <a href="https://www.amazon.com/example-affiliate-link" target="_blank">Køb Produkt 3</a>
+        </div>
+    </div>
+</section>
 
-    <!-- Google Ads Section -->
-    <section id="ads">
-        <h2>Reklamer</h2>
-        <p>Her er dine Google AdSense-reklamer:</p>
-        <!-- Google AdSense annonceenhed -->
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-8506740750820089"
-            data-ad-slot="7806394673"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </section>
+<!-- Google AdSense Section -->
+<section id="ads" class="section-content">
+    <h2>Reklamer</h2>
+    <p>Her vises dine Google AdSense reklamer, som hjælper med at generere indtægter:</p>
+    <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-8506740750820089"
+        data-ad-slot="7806394673"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Kontakt</h2>
-        <p>Har du spørgsmål eller ønsker at samarbejde med os? Kontakt os via e-mail på: <a href="mailto:mikkeljensen2704@hotmail.com">mikkeljensen2704@hotmail.com</a></p>
-    </section>
-</main>
+<!-- Contact Section -->
+<section id="contact" class="section-content">
+    <h2>Kontakt os</h2>
+    <p>Har du spørgsmål? Du kan kontakte os via e-mail: <a href="mailto:mikkeljensen2704@hotmail.com">mikkeljensen2704@hotmail.com</a></p>
+</section>
 
+<!-- Footer -->
 <footer>
-    <p>&copy; 2024 Professionel Hjemmeside. Alle rettigheder forbeholdes.</p>
+    <p>&copy; 2024 Din Online Platform. Alle rettigheder forbeholdes.</p>
 </footer>
 
 </body>
