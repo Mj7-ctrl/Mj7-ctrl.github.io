@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Din bedste platform for teknologi og innovation.">
+    <meta name="description" content="Din professionelle platform for teknologi og innovation.">
     <title>Din Tekniske Platform</title>
 
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8506740750820089" crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- CSS styling -->
     <style>
@@ -18,44 +18,15 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: #f4f4f9;
             color: #333;
+            overflow-x: hidden;
         }
 
-        /* Fast Navigation Bar */
-        nav {
-            background-color: #333;
-            padding: 15px;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 10;
-        }
-
-        nav ul {
-            list-style-type: none;
-            text-align: center;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-        }
-
-        nav ul li a:hover {
-            color: #4CAF50;
-        }
-
-        /* Hero Section */
+        /* Header & Navigation */
         header {
-            background-image: url('https://source.unsplash.com/1920x1080/?tech,innovation');
+            background-image: url('https://source.unsplash.com/1920x1080/?technology,innovation');
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -68,25 +39,58 @@
             position: relative;
         }
 
+        header nav {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav ul li a:hover {
+            color: #4CAF50;
+        }
+
+        /* Hero Section */
         header h1 {
             font-size: 4rem;
-            z-index: 2;
         }
 
         header p {
             font-size: 1.5rem;
             margin-top: 20px;
-            z-index: 2;
         }
 
         header button {
-            padding: 10px 20px;
+            padding: 15px 30px;
             background-color: #4CAF50;
             border: none;
             color: white;
             font-size: 1.2rem;
             margin-top: 30px;
             cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
         }
 
         header button:hover {
@@ -131,6 +135,7 @@
             display: flex;
             justify-content: center;
             gap: 30px;
+            flex-wrap: wrap;
         }
 
         .service-card {
@@ -140,6 +145,11 @@
             padding: 30px;
             max-width: 300px;
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
         }
 
         .service-card img {
@@ -210,6 +220,29 @@
             background-color: #45a049;
         }
 
+        /* Video Sektion */
+        .video-section {
+            padding: 60px 20px;
+            background-color: #f4f4f9;
+            text-align: center;
+        }
+
+        .video-section h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 450px;
+        }
+
         /* Testimonials Section */
         .testimonials-section {
             padding: 60px 20px;
@@ -249,7 +282,7 @@
             margin-top: 20px;
         }
 
-        /* Contact Section */
+        /* Kontakt-sektion */
         .contact-section {
             padding: 60px 20px;
             background-color: #f9f9f9;
@@ -313,7 +346,7 @@
             text-decoration: underline;
         }
 
-        /* Responsive */
+        /* Responsive Design */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 3rem;
@@ -323,37 +356,40 @@
                 font-size: 1.2rem;
             }
 
-            .service-cards, .product-grid {
+            .service-cards, .product-grid, .testimonials-grid {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .video-container iframe {
+                height: 250px;
             }
         }
     </style>
 </head>
 <body>
 
-<!-- Fast Navigation -->
-<nav>
-    <ul>
-        <li><a href="#home">Hjem</a></li>
-        <li><a href="#about">Om os</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#products">Produkter</a></li>
-        <li><a href="#contact">Kontakt</a></li>
-    </ul>
-</nav>
-
-<!-- Hero Section -->
+<!-- Navigation and Hero Section -->
 <header id="home">
-    <h1>Din Tekniske Platform</h1>
-    <p>Oplev fantastiske produkter og tjenester</p>
+    <nav>
+        <div class="logo"><a href="#">DinPlatform</a></div>
+        <ul>
+            <li><a href="#about">Om os</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#products">Produkter</a></li>
+            <li><a href="#videos">Videoer</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+    </nav>
+    <h1>Velkommen til Din Tekniske Platform</h1>
+    <p>Oplev fantastiske produkter, teknologier og innovation</p>
     <button onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'});">Læs Mere</button>
 </header>
 
 <!-- Om os Sektion -->
 <section class="about-section" id="about">
     <h2>Om os</h2>
-    <p>Vi er en virksomhed, der leverer de bedste teknologiske tjenester og produkter. Vores mission er at hjælpe dig med at finde de bedste løsninger, uanset hvad du leder efter.</p>
+    <p>Vi er en virksomhed, der leverer innovative løsninger og produkter. Vores mission er at tilbyde de bedste teknologiske løsninger, der matcher dine behov.</p>
 </section>
 
 <!-- Services Section -->
@@ -362,37 +398,18 @@
     <div class="service-cards">
         <div class="service-card">
             <img src="https://source.unsplash.com/100x100/?tech" alt="Service 1">
-            <h3>Teknisk Support</h3>
-            <p>Vi tilbyder den bedste service inden for teknologi og design.</p>
+            <h3>Teknologiske løsninger</h3>
+            <p>Vi tilbyder den nyeste teknologi for at løse komplekse problemer.</p>
         </div>
         <div class="service-card">
-            <img src="https://source.unsplash.com/100x100/?business" alt="Service 2">
-            <h3>Forretningsløsninger</h3>
-            <p>Vores forretningstjenester hjælper din virksomhed med at vokse.</p>
+            <img src="https://source.unsplash.com/100x100/?innovation" alt="Service 2">
+            <h3>Innovation</h3>
+            <p>Vores innovative løsninger skaber nye muligheder for din virksomhed.</p>
         </div>
         <div class="service-card">
             <img src="https://source.unsplash.com/100x100/?consulting" alt="Service 3">
-            <h3>Konsulentservice</h3>
-            <p>Få ekspertrådgivning fra vores team af erfarne konsulenter.</p>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonials Section -->
-<section class="testimonials-section" id="testimonials">
-    <h2>Hvad vores kunder siger</h2>
-    <div class="testimonials-grid">
-        <div class="testimonial-item">
-            <p>"Den bedste oplevelse, jeg nogensinde har haft. Jeg vil stærkt anbefale dem til alle!"</p>
-            <h4>- Kunde 1</h4>
-        </div>
-        <div class="testimonial-item">
-            <p>"Fantastisk service og produkter. De forstår virkelig, hvad kunderne har brug for."</p>
-            <h4>- Kunde 2</h4>
-        </div>
-        <div class="testimonial-item">
-            <p>"De leverede præcis det, vi havde brug for, og endda mere. Utroligt team!"</p>
-            <h4>- Kunde 3</h4>
+            <h3>Konsultation</h3>
+            <p>Få rådgivning fra erfarne eksperter, der hjælper din virksomhed til succes.</p>
         </div>
     </div>
 </section>
@@ -402,16 +419,43 @@
     <h2>Produkter</h2>
     <div class="product-grid">
         <div class="product-item">
-            <img src="https://source.unsplash.com/300x200/?product" alt="Produkt 1">
+            <img src="https://source.unsplash.com/300x200/?gadget" alt="Produkt 1">
             <a href="#">Køb Produkt 1</a>
         </div>
         <div class="product-item">
-            <img src="https://source.unsplash.com/300x200/?gadget" alt="Produkt 2">
+            <img src="https://source.unsplash.com/300x200/?tech" alt="Produkt 2">
             <a href="#">Køb Produkt 2</a>
         </div>
         <div class="product-item">
-            <img src="https://source.unsplash.com/300x200/?innovation" alt="Produkt 3">
+            <img src="https://source.unsplash.com/300x200/?device" alt="Produkt 3">
             <a href="#">Køb Produkt 3</a>
+        </div>
+    </div>
+</section>
+
+<!-- Video Sektion -->
+<section class="video-section" id="videos">
+    <h2>Vores Videoer</h2>
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section" id="testimonials">
+    <h2>Hvad vores kunder siger</h2>
+    <div class="testimonials-grid">
+        <div class="testimonial-item">
+            <p>"Den bedste teknologi, jeg nogensinde har brugt. Kan stærkt anbefales!"</p>
+            <h4>- Kunde 1</h4>
+        </div>
+        <div class="testimonial-item">
+            <p>"Deres konsulentservice hjalp min virksomhed med at vokse på ingen tid."</p>
+            <h4>- Kunde 2</h4>
+        </div>
+        <div class="testimonial-item">
+            <p>"Fantastisk kundeservice og produkter af høj kvalitet."</p>
+            <h4>- Kunde 3</h4>
         </div>
     </div>
 </section>
