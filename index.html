@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Din professionelle platform for teknologi og innovation.">
-    <title>Din Tekniske Platform</title>
+    <meta name="description" content="Din moderne platform for mode og livsstil. Find spændende produkter og trends.">
+    <title>Moderne Livsstil - Din Guide til De Nyeste Trends</title>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8506740750820089" crossorigin="anonymous"></script>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- CSS styling -->
+    <!-- CSS Styling -->
     <style>
         * {
             margin: 0;
@@ -24,40 +27,23 @@
             overflow-x: hidden;
         }
 
-        /* Header & Navigation */
-        header {
-            background-image: url('https://source.unsplash.com/1920x1080/?technology,innovation');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
-
-        header nav {
-            position: absolute;
-            top: 0;
-            width: 100%;
+        /* Navigation Bar */
+        nav {
+            background-color: #333;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.6);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
         }
 
         nav ul {
-            list-style-type: none;
+            list-style: none;
             display: flex;
             gap: 20px;
-        }
-
-        nav ul li {
-            display: inline;
         }
 
         nav ul li a {
@@ -73,13 +59,28 @@
         }
 
         /* Hero Section */
+        header {
+            background-image: url('https://source.unsplash.com/1920x1080/?fashion,style');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
         header h1 {
             font-size: 4rem;
+            margin-bottom: 10px;
         }
 
         header p {
             font-size: 1.5rem;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         header button {
@@ -88,9 +89,8 @@
             border: none;
             color: white;
             font-size: 1.2rem;
-            margin-top: 30px;
+            margin-top: 20px;
             cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
         }
 
         header button:hover {
@@ -220,30 +220,7 @@
             background-color: #45a049;
         }
 
-        /* Video Sektion */
-        .video-section {
-            padding: 60px 20px;
-            background-color: #f4f4f9;
-            text-align: center;
-        }
-
-        .video-section h2 {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 40px;
-        }
-
-        .video-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .video-container iframe {
-            width: 100%;
-            height: 450px;
-        }
-
-        /* Testimonials Section */
+        /* Testimonial Section */
         .testimonials-section {
             padding: 60px 20px;
             background-color: #f0f2f5;
@@ -282,6 +259,26 @@
             margin-top: 20px;
         }
 
+        /* Affiliate Banners and Ads */
+        .ads-section {
+            padding: 40px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .ads-banner {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .ads-banner img {
+            width: 100%;
+            max-width: 728px;
+            height: auto;
+        }
+
         /* Kontakt-sektion */
         .contact-section {
             padding: 60px 20px;
@@ -317,7 +314,6 @@
             border: none;
             font-size: 1.2rem;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
 
         .contact-section form button:hover {
@@ -334,7 +330,6 @@
 
         footer p {
             font-size: 1.1rem;
-            margin-bottom: 10px;
         }
 
         footer a {
@@ -346,50 +341,43 @@
             text-decoration: underline;
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 3rem;
-            }
-
-            header p {
-                font-size: 1.2rem;
             }
 
             .service-cards, .product-grid, .testimonials-grid {
                 flex-direction: column;
                 align-items: center;
             }
-
-            .video-container iframe {
-                height: 250px;
-            }
         }
     </style>
 </head>
 <body>
 
-<!-- Navigation and Hero Section -->
+<!-- Fast Navigation -->
+<nav>
+    <div class="logo"><a href="#">DinPlatform</a></div>
+    <ul>
+        <li><a href="#about">Om os</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Produkter</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
 <header id="home">
-    <nav>
-        <div class="logo"><a href="#">DinPlatform</a></div>
-        <ul>
-            <li><a href="#about">Om os</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#products">Produkter</a></li>
-            <li><a href="#videos">Videoer</a></li>
-            <li><a href="#contact">Kontakt</a></li>
-        </ul>
-    </nav>
-    <h1>Velkommen til Din Tekniske Platform</h1>
-    <p>Oplev fantastiske produkter, teknologier og innovation</p>
+    <h1>Moderne Livsstil & Trends</h1>
+    <p>Oplev de nyeste modeprodukter og trends i dag</p>
     <button onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'});">Læs Mere</button>
 </header>
 
 <!-- Om os Sektion -->
 <section class="about-section" id="about">
     <h2>Om os</h2>
-    <p>Vi er en virksomhed, der leverer innovative løsninger og produkter. Vores mission er at tilbyde de bedste teknologiske løsninger, der matcher dine behov.</p>
+    <p>Vi er en platform dedikeret til at bringe dig de nyeste trends inden for mode og livsstil. Vi samarbejder med førende brands for at give dig det bedste udvalg af produkter.</p>
 </section>
 
 <!-- Services Section -->
@@ -397,19 +385,19 @@
     <h2>Vores Tjenester</h2>
     <div class="service-cards">
         <div class="service-card">
-            <img src="https://source.unsplash.com/100x100/?tech" alt="Service 1">
-            <h3>Teknologiske løsninger</h3>
-            <p>Vi tilbyder den nyeste teknologi for at løse komplekse problemer.</p>
+            <img src="https://source.unsplash.com/100x100/?fashion" alt="Mode">
+            <h3>Modetrends</h3>
+            <p>Hold dig opdateret med de nyeste tendenser inden for mode.</p>
         </div>
         <div class="service-card">
-            <img src="https://source.unsplash.com/100x100/?innovation" alt="Service 2">
-            <h3>Innovation</h3>
-            <p>Vores innovative løsninger skaber nye muligheder for din virksomhed.</p>
+            <img src="https://source.unsplash.com/100x100/?lifestyle" alt="Livsstil">
+            <h3>Livsstilsprodukter</h3>
+            <p>Opdag produkter, der passer perfekt til din moderne livsstil.</p>
         </div>
         <div class="service-card">
-            <img src="https://source.unsplash.com/100x100/?consulting" alt="Service 3">
-            <h3>Konsultation</h3>
-            <p>Få rådgivning fra erfarne eksperter, der hjælper din virksomhed til succes.</p>
+            <img src="https://source.unsplash.com/100x100/?accessories" alt="Accessories">
+            <h3>Accessories</h3>
+            <p>Find de perfekte tilbehør til at fuldende dit look.</p>
         </div>
     </div>
 </section>
@@ -419,44 +407,44 @@
     <h2>Produkter</h2>
     <div class="product-grid">
         <div class="product-item">
-            <img src="https://source.unsplash.com/300x200/?gadget" alt="Produkt 1">
-            <a href="#">Køb Produkt 1</a>
+            <img src="https://source.unsplash.com/300x200/?shoes" alt="Sko">
+            <a href="#">Køb Sko</a>
         </div>
         <div class="product-item">
-            <img src="https://source.unsplash.com/300x200/?tech" alt="Produkt 2">
-            <a href="#">Køb Produkt 2</a>
+            <img src="https://source.unsplash.com/300x200/?jacket" alt="Jakke">
+            <a href="#">Køb Jakke</a>
         </div>
         <div class="product-item">
-            <img src="https://source.unsplash.com/300x200/?device" alt="Produkt 3">
-            <a href="#">Køb Produkt 3</a>
+            <img src="https://source.unsplash.com/300x200/?watch" alt="Ur">
+            <a href="#">Køb Ur</a>
         </div>
     </div>
 </section>
 
-<!-- Video Sektion -->
-<section class="video-section" id="videos">
-    <h2>Vores Videoer</h2>
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-    </div>
-</section>
-
-<!-- Testimonials Section -->
+<!-- Testimonial Section -->
 <section class="testimonials-section" id="testimonials">
     <h2>Hvad vores kunder siger</h2>
     <div class="testimonials-grid">
         <div class="testimonial-item">
-            <p>"Den bedste teknologi, jeg nogensinde har brugt. Kan stærkt anbefales!"</p>
+            <p>"Fantastisk platform til at finde de bedste modeprodukter. Jeg elsker deres udvalg!"</p>
             <h4>- Kunde 1</h4>
         </div>
         <div class="testimonial-item">
-            <p>"Deres konsulentservice hjalp min virksomhed med at vokse på ingen tid."</p>
+            <p>"De seneste trends og produkter leveret lige til døren. Meget tilfreds!"</p>
             <h4>- Kunde 2</h4>
         </div>
         <div class="testimonial-item">
-            <p>"Fantastisk kundeservice og produkter af høj kvalitet."</p>
+            <p>"Deres livsstilsprodukter er perfekte til min hverdag. Kan stærkt anbefales."</p>
             <h4>- Kunde 3</h4>
         </div>
+    </div>
+</section>
+
+<!-- Google Ads Section -->
+<section class="ads-section">
+    <h2>Annoncebannere</h2>
+    <div class="ads-banner">
+        <img src="https://via.placeholder.com/728x90" alt="Google AdSense Banner">
     </div>
 </section>
 
@@ -473,7 +461,7 @@
 
 <!-- Footer -->
 <footer>
-    <p>&copy; 2024 Din Tekniske Platform. Alle rettigheder forbeholdes.</p>
+    <p>&copy; 2024 Moderne Livsstil. Alle rettigheder forbeholdes.</p>
     <p><a href="#home">Tilbage til toppen</a></p>
 </footer>
 
