@@ -1,47 +1,212 @@
-import random
-from flask import Flask, jsonify
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Min Fuldstændige Hjemmeside</title>
+    
+    <!-- CSS Styling -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-class Satellite:
-    def __init__(self):
-        self.position = self.get_random_position()
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
 
-    def get_random_position(self):
-        lat = random.uniform(-90, 90)
-        lon = random.uniform(-180, 180)
-        return (lat, lon)
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
 
-    def get_position(self):
-        return self.position
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-class Scanner:
-    def __init__(self, range_km):
-        self.range_km = range_km
+        .logo h1 {
+            margin-left: 10px;
+        }
 
-    def scan_for_enemies(self, satellite_position):
-        enemies_detected = random.randint(0, 5)
-        enemy_positions = []
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
 
-        for _ in range(enemies_detected):
-            enemy_lat = satellite_position[0] + random.uniform(-self.range_km / 111, self.range_km / 111)
-            enemy_lon = satellite_position[1] + random.uniform(-self.range_km / 111, self.range_km / 111)
-            enemy_positions.append((enemy_lat, enemy_lon))
+        .nav-links li {
+            margin: 0 15px;
+        }
 
-        return enemy_positions
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+        }
 
-app = Flask(__name__)
+        section {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-satellite = Satellite()
-scanner = Scanner(range_km=50)
+        #home {
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 100px 20px;
+        }
 
-@app.route('/scan', methods=['GET'])
-def scan():
-    satellite_position = satellite.get_position()
-    enemies = scanner.scan_for_enemies(satellite_position)
-    response = {
-        "satellite_position": satellite_position,
-        "enemies_detected": enemies
-    }
-    return jsonify(response)
+        .content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
 
-if __name__ == '__main__':
-    app.run(debug=True)
+        .content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        #services {
+            background-color: #fff;
+        }
+
+        .services-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .service-item {
+            width: 30%;
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #about {
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        #contact {
+            background-color: #fff;
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Min Hjemmeside</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Hjem</a></li>
+                <li><a href="#services">Tjenester</a></li>
+                <li><a href="#about">Om Os</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="content">
+            <h2>Velkommen til Min Hjemmeside</h2>
+            <p>Her kan du finde informationer om vores tjenester.</p>
+            <a href="#services" class="cta-button">Læs Mere</a>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>Vores Tjenester</h2>
+        <div class="services-container">
+            <div class="service-item">
+                <h3>Tjeneste 1</h3>
+                <p>Beskrivelse af tjeneste 1.</p>
+            </div>
+            <div class="service-item">
+                <h3>Tjeneste 2</h3>
+                <p>Beskrivelse af tjeneste 2.</p>
+            </div>
+            <div class="service-item">
+                <h3>Tjeneste 3</h3>
+                <p>Beskrivelse af tjeneste 3.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>Om Os</h2>
+        <p>Vi er et dedikeret team, som leverer de bedste tjenester til vores kunder.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Kontakt Os</h2>
+        <form>
+            <input type="text" placeholder="Dit Navn" required>
+            <input type="email" placeholder="Din Email" required>
+            <textarea placeholder="Din Besked" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Min Hjemmeside. Alle rettigheder forbeholdes.</p>
+    </footer>
+
+    <!-- JavaScript (her kan du tilføje interaktivitet) -->
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Tak for din besked!');
+        });
+    </script>
+</body>
+</html>
