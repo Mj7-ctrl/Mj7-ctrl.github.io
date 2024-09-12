@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Professionel Hjemmeside</title>
+    <title>Professionel Marketing Hjemmeside</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -21,6 +21,7 @@
             font-family: 'Poppins', sans-serif;
             background-color: #f4f4f4;
             color: #333;
+            overflow-x: hidden;
         }
 
         header {
@@ -56,7 +57,7 @@
         }
 
         #home {
-            background-image: url('https://via.placeholder.com/1200x600');
+            background-image: url('https://via.placeholder.com/1200x600'); /* Replace this with a better image or the one you provided */
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -111,8 +112,10 @@
 
         .services-container {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-around;
             margin-top: 40px;
+            gap: 20px;
         }
 
         .service-item {
@@ -121,11 +124,20 @@
             background-color: #f4f4f4;
             box-shadow: 0 5px 10px rgba(0,0,0,0.1);
             border-radius: 8px;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            position: relative;
         }
 
         .service-item:hover {
             transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .service-item img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
         }
 
         .service-item h3 {
@@ -208,14 +220,17 @@
         <h2>Vores Tjenester</h2>
         <div class="services-container">
             <div class="service-item">
+                <img src="https://via.placeholder.com/400x300" alt="TikTok Marketing">
                 <h3>TikTok Markedsføring</h3>
                 <p>Få din virksomhed til at vokse gennem vores specialiserede TikTok-markedsføringstjenester.</p>
             </div>
             <div class="service-item">
+                <img src="https://via.placeholder.com/400x300" alt="Social Media Campaigns">
                 <h3>Sociale Medie Kampagner</h3>
                 <p>Vi håndterer kampagner på tværs af alle platforme for at optimere din synlighed og engagement.</p>
             </div>
             <div class="service-item">
+                <img src="https://via.placeholder.com/400x300" alt="Content Creation">
                 <h3>Content Skabelse</h3>
                 <p>Vores team skaber professionelt indhold, som fanger dine kunder og øger engagementet.</p>
             </div>
