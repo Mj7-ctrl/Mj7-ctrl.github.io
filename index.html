@@ -3,269 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Professionel Marketing Hjemmeside</title>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <!-- CSS Styling -->
+    <title>Digital Marketing - Boost Din Forretning</title>
     <style>
-        * {
+        /* Generel styling */
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
             background-color: #f4f4f4;
-            color: #333;
-            overflow-x: hidden;
         }
 
         header {
-            background-color: #1a1a1a;
+            background-color: #333;
             color: #fff;
-            padding: 20px;
+            padding: 10px 0;
             text-align: center;
         }
 
-        header h1 {
-            font-size: 2.5em;
-            font-weight: 600;
+        header .logo img {
+            width: 150px;
         }
 
-        nav {
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
+        nav ul {
+            list-style: none;
+            padding: 0;
         }
 
-        nav a {
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
             color: #fff;
             text-decoration: none;
+            font-weight: bold;
+        }
+
+        .hero {
+            background-color: #ff6600;
+            color: #fff;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .cta-btn {
+            background-color: #333;
+            color: #fff;
             padding: 10px 20px;
-            background-color: #f2545b;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        nav a:hover {
-            background-color: #d84147;
-        }
-
-        #home {
-            background-image: url('https://via.placeholder.com/1200x600'); /* Replace this with a better image or the one you provided */
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            text-align: center;
-        }
-
-        #home h2 {
-            font-size: 3em;
-            font-weight: 400;
-            margin-bottom: 20px;
-        }
-
-        #home p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-        }
-
-        .cta-button {
-            padding: 15px 30px;
-            background-color: #f2545b;
-            color: #fff;
-            font-size: 1.2em;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
         }
 
-        .cta-button:hover {
-            background-color: #d84147;
-        }
-
-        section {
-            padding: 60px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+        .intro, .services, .contact-form {
+            padding: 40px 20px;
             text-align: center;
         }
 
-        h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
+        .services ul {
+            list-style: none;
+            padding: 0;
         }
 
-        #services {
-            background-color: #fff;
+        .services ul li {
+            margin: 15px 0;
+            font-size: 1.2rem;
         }
 
-        .services-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin-top: 40px;
-            gap: 20px;
-        }
-
-        .service-item {
-            width: 30%;
-            padding: 20px;
-            background-color: #f4f4f4;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .service-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        .service-item img {
-            width: 100%;
-            height: auto;
-            margin-bottom: 15px;
-        }
-
-        .service-item h3 {
-            margin-bottom: 15px;
-            font-size: 1.8em;
-        }
-
-        .service-item p {
-            font-size: 1.1em;
-        }
-
-        #about {
-            background-color: #f9f9f9;
-        }
-
-        #contact form {
-            max-width: 600px;
-            margin: 0 auto;
+        form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            align-items: center;
         }
 
-        input, textarea {
-            padding: 15px;
-            font-size: 1em;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+        form input, form textarea {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
         }
 
         button {
-            padding: 15px;
-            background-color: #f2545b;
+            background-color: #ff6600;
             color: #fff;
-            font-size: 1.2em;
             border: none;
+            padding: 10px 20px;
             cursor: pointer;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #d84147;
         }
 
         footer {
             background-color: #333;
             color: #fff;
-            padding: 20px;
+            padding: 10px;
             text-align: center;
         }
 
-        footer p {
-            margin: 0;
-        }
     </style>
 </head>
 <body>
 
     <!-- Header -->
     <header>
-        <h1>Professionel Marketing Hjemmeside</h1>
+        <div class="logo">
+            <img src="https://via.placeholder.com/150x50?text=Logo" alt="Digital Marketing Logo">
+        </div>
         <nav>
-            <a href="#home">Hjem</a>
-            <a href="#services">Tjenester</a>
-            <a href="#about">Om Os</a>
-            <a href="#contact">Kontakt</a>
+            <ul>
+                <li><a href="#hero">Forside</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
         </nav>
     </header>
 
-    <!-- Hjem Sektion -->
-    <section id="home">
-        <h2>Velkommen til Vores Tjenester</h2>
-        <p>Vi hjælper dig med at vokse på TikTok og andre sociale medier.</p>
-        <a href="#services" class="cta-button">Læs Mere</a>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <h1>Få flere kunder med effektiv digital markedsføring</h1>
+        <p>Vi hjælper virksomheder med at vækste gennem SEO, annoncering og indholdsstrategi.</p>
+        <a href="#services" class="cta-btn">Se vores tjenester</a>
     </section>
 
-    <!-- Tjenester Sektion -->
-    <section id="services">
-        <h2>Vores Tjenester</h2>
-        <div class="services-container">
-            <div class="service-item">
-                <img src="https://via.placeholder.com/400x300" alt="TikTok Marketing">
-                <h3>TikTok Markedsføring</h3>
-                <p>Få din virksomhed til at vokse gennem vores specialiserede TikTok-markedsføringstjenester.</p>
-            </div>
-            <div class="service-item">
-                <img src="https://via.placeholder.com/400x300" alt="Social Media Campaigns">
-                <h3>Sociale Medie Kampagner</h3>
-                <p>Vi håndterer kampagner på tværs af alle platforme for at optimere din synlighed og engagement.</p>
-            </div>
-            <div class="service-item">
-                <img src="https://via.placeholder.com/400x300" alt="Content Creation">
-                <h3>Content Skabelse</h3>
-                <p>Vores team skaber professionelt indhold, som fanger dine kunder og øger engagementet.</p>
-            </div>
-        </div>
+    <!-- Intro Section -->
+    <section class="intro">
+        <h2>Hvorfor vælge os?</h2>
+        <p>Vi tilbyder skræddersyede løsninger, der passer perfekt til din virksomhed. Med mange års erfaring inden for digital markedsføring er vi din foretrukne partner.</p>
     </section>
 
-    <!-- Om Os Sektion -->
-    <section id="about">
-        <h2>Om Os</h2>
-        <p>Vi er et erfarent team af marketingeksperter, der hjælper virksomheder med at vokse gennem sociale medier.</p>
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h1>Vores Tjenester</h1>
+        <ul>
+            <li><strong>SEO Optimering:</strong> Øg din synlighed på Google og få flere organiske besøgende.</li>
+            <li><strong>Google Ads (PPC):</strong> Få målrettet trafik gennem betalte annoncer.</li>
+            <li><strong>Social Media Management:</strong> Byg dit brand på sociale medier som Facebook og Instagram.</li>
+            <li><strong>Indholdsmarkedsføring:</strong> Skab værdifuldt indhold, der engagerer dine kunder.</li>
+            <li><strong>E-mail Markedsføring:</strong> Automatisér og personaliser dine e-mails for maksimal effekt.</li>
+        </ul>
+        <a href="#contact" class="cta-btn">Kontakt os for en strategi</a>
     </section>
 
-    <!-- Kontakt Sektion -->
-    <section id="contact">
-        <h2>Kontakt Os</h2>
-        <form>
-            <input type="text" placeholder="Dit Navn" required>
-            <input type="email" placeholder="Din Email" required>
-            <textarea placeholder="Din Besked" required></textarea>
-            <button type="submit">Send Besked</button>
+    <!-- Contact Section -->
+    <section class="contact-form" id="contact">
+        <h1>Kontakt os</h1>
+        <form action="https://formspree.io/f/{your_form_id}" method="POST">
+            <label for="name">Navn:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Besked:</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <button type="submit">Send besked</button>
         </form>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Professionel Hjemmeside. Alle rettigheder forbeholdes.</p>
+        <p>&copy; 2024 Digital Marketing. Alle rettigheder forbeholdes.</p>
     </footer>
-
-    <!-- JavaScript (Her kan du tilføje interaktivitet) -->
-    <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Tak for din besked! Vi vender tilbage hurtigst muligt.');
-        });
-    </script>
 
 </body>
 </html>
