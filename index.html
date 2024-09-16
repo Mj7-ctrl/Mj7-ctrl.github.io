@@ -1,101 +1,102 @@
-const express = require('express');
-const session = require('express-session');
-const passport = require('passport');
-const GitHubStrategy = require('passport-github2').Strategy;
-const axios = require('axios');
-const path = require('path');
-require('dotenv').config();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub OAuth App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #218838;
+        }
+        #repo-list {
+            margin-top: 20px;
+            list-style: none;
+            padding: 0;
+        }
+        #repo-list li {
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
 
-const app = express();
-
-// Session handling
-app.use(session({
-  secret: 'supersecret',
-  resave: false,
-  saveUninitialized: true
-}));
-
-// Passport configuration
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-
-passport.deserializeUser((obj, done) => {
-  done(null, obj);
-});
-
-// GitHub OAuth Strategy
-passport.use(new GitHubStrategy({
-  clientID: process.env.GITHUB_CLIENT_ID,
-  clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "http://localhost:3000/auth/github/callback"
-},
-(accessToken, refreshToken, profile, done) => {
-  profile.accessToken = accessToken;
-  return done(null, profile);
-}));
-
-// Serve static files (Frontend)
-app.use(express.static('public'));
-
-// GitHub OAuth route
-app.get('/auth/github',
-  passport.authenticate('github', { scope: ['user:email', 'repo'] })
-);
-
-// GitHub OAuth callback
-app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/' }),
-  (req, res) => {
-    res.redirect('/dashboard');
-  }
-);
-
-// Dashboard Route (Requires login)
-app.get('/dashboard', ensureAuthenticated, (req, res) => {
-  const accessToken = req.user.accessToken;
-  axios.get('https://api.github.com/user/repos', {
-    headers: { Authorization: `token ${accessToken}` }
-  })
-  .then(response => {
-    let repoList = '<h2>Your Repositories:</h2><ul>';
-    response.data.forEach(repo => {
-      repoList += `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a></li>`;
-    });
-    repoList += '</ul>';
-    res.send(`
-      <h1>Welcome ${req.user.username}</h1>
-      <a href="/logout">Logout</a>
-      ${repoList}
-    `);
-  })
-  .catch(err => res.send('Error fetching repositories'));
-});
-
-// Logout Route
-app.get('/logout', (req, res) => {
-  req.logout(() => {});
-  res.redirect('/');
-});
-
-// Ensure authenticated middleware
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/');
-}
-
-// Frontend - index.html for login
-app.get('/', (req, res) => {
-  res.send(`
     <h1>GitHub OAuth App</h1>
-    <a href="/auth/github">Login with GitHub</a>
-  `);
-});
+    <p id="login-message">Log in to view your repositories</p>
+    <a id="login-button" href="#">Login with GitHub</a>
 
-// Start server
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
-});
+    <ul id="repo-list"></ul>
+
+    <script>
+        const clientId = 'YOUR_GITHUB_CLIENT_ID'; // Sæt din GitHub Client ID her
+        const redirectUri = window.location.origin + window.location.pathname; // Dette er din redirect URI
+
+        // Bygger GitHub OAuth URL til login
+        const githubOAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&scope=repo&redirect_uri=${redirectUri}`;
+
+        document.getElementById('login-button').href = githubOAuthUrl;
+
+        // Tjekker om der er en kode i URL'en efter login
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+
+        if (code) {
+            document.getElementById('login-message').textContent = 'Fetching your repositories...';
+            document.getElementById('login-button').style.display = 'none';
+
+            // Få adgangstoken fra GitHub (note: du skal bruge en server-side proxy for dette i produktion)
+            fetch(`https://github.com/login/oauth/access_token?client_id=${clientId}&code=${code}`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const accessToken = data.access_token;
+
+                // Hent repositories med adgangstoken
+                return fetch('https://api.github.com/user/repos', {
+                    headers: {
+                        Authorization: `token ${accessToken}`
+                    }
+                });
+            })
+            .then(response => response.json())
+            .then(repos => {
+                const repoList = document.getElementById('repo-list');
+                repoList.innerHTML = '';
+
+                repos.forEach(repo => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a>`;
+                    repoList.appendChild(listItem);
+                });
+            })
+            .catch(err => {
+                document.getElementById('login-message').textContent = 'Error fetching repositories. Please try again.';
+                console.error(err);
+            });
+        }
+    </script>
+
+</body>
+</html>
