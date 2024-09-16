@@ -1,91 +1,235 @@
-// backend/index.js
-const express = require('express');
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const cors = require('cors');
-const app = express();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Optimization App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
 
-app.use(express.json());
-app.use(cors());
+        .container {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            border-radius: 8px;
+            margin: 20px;
+        }
 
-// Database connection (replace with your MongoDB URI)
-mongoose.connect('mongodb://localhost:27017/habitsDB', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
-    console.log('Connected to MongoDB');
-}).catch(err => {
-    console.error('Error connecting to MongoDB', err);
-});
+        h1, h2 {
+            text-align: center;
+        }
 
-// User Schema
-const UserSchema = new mongoose.Schema({
-    username: String,
-    password: String
-});
+        input[type="text"], input[type="password"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
 
-const User = mongoose.model('User', UserSchema);
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
 
-// Habit Schema
-const HabitSchema = new mongoose.Schema({
-    userId: mongoose.Schema.Types.ObjectId,
-    name: String,
-    duration: Number,
-    frequency: String
-});
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
 
-const Habit = mongoose.model('Habit', HabitSchema);
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
-// Register user
-app.post('/register', async (req, res) => {
-    const { username, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ username, password: hashedPassword });
-    await user.save();
-    res.status(201).send('User registered');
-});
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+        }
 
-// Login user
-app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
-    if (!user) {
-        return res.status(400).send('User not found');
-    }
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-        return res.status(400).send('Invalid password');
-    }
-    const token = jwt.sign({ userId: user._id }, 'SECRET_KEY');
-    res.send({ token });
-});
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
 
-// Middleware for authentication
-const authMiddleware = (req, res, next) => {
-    const token = req.headers['authorization'];
-    if (!token) return res.status(401).send('Unauthorized');
-    jwt.verify(token, 'SECRET_KEY', (err, decoded) => {
-        if (err) return res.status(401).send('Unauthorized');
-        req.userId = decoded.userId;
-        next();
-    });
-};
+    <div class="container" id="auth-section">
+        <h1>Habit Optimization</h1>
+        <h2>Registrering</h2>
+        <input type="text" id="register-username" placeholder="Brugernavn">
+        <input type="password" id="register-password" placeholder="Adgangskode">
+        <button id="register-btn">Registrer</button>
 
-// Create a new habit
-app.post('/habits', authMiddleware, async (req, res) => {
-    const { name, duration, frequency } = req.body;
-    const habit = new Habit({ userId: req.userId, name, duration, frequency });
-    await habit.save();
-    res.status(201).send(habit);
-});
+        <h2>Log ind</h2>
+        <input type="text" id="login-username" placeholder="Brugernavn">
+        <input type="password" id="login-password" placeholder="Adgangskode">
+        <button id="login-btn">Log ind</button>
+    </div>
 
-// Get habits for the logged-in user
-app.get('/habits', authMiddleware, async (req, res) => {
-    const habits = await Habit.find({ userId: req.userId });
-    res.send(habits);
-});
+    <div class="container" id="habit-section" style="display: none;">
+        <h1>Vaneoversigt</h1>
+        <ul id="habit-list"></ul>
 
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
-});
+        <h2>Tilføj ny vane</h2>
+        <input type="text" id="habit-name" placeholder="Vanenavn">
+        <input type="number" id="habit-duration" placeholder="Varighed (i timer)">
+        <select id="habit-frequency">
+            <option value="daglig">Daglig</option>
+            <option value="ugentlig">Ugentlig</option>
+            <option value="månedlig">Månedlig</option>
+        </select>
+        <button id="add-habit-btn">Tilføj vane</button>
+    </div>
+
+    <script>
+        const registerBtn = document.getElementById('register-btn');
+        const loginBtn = document.getElementById('login-btn');
+        const addHabitBtn = document.getElementById('add-habit-btn');
+
+        const habitSection = document.getElementById('habit-section');
+        const authSection = document.getElementById('auth-section');
+
+        let token = '';
+
+        // API base URL
+        const apiUrl = 'http://localhost:3000'; // Skift til den faktiske URL på din backend
+
+        // Registrer bruger
+        registerBtn.addEventListener('click', async () => {
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+            
+            const response = await fetch(`${apiUrl}/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (response.status === 201) {
+                alert('Bruger registreret!');
+            } else {
+                alert('Fejl under registrering.');
+            }
+        });
+
+        // Log ind
+        loginBtn.addEventListener('click', async () => {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            const response = await fetch(`${apiUrl}/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            const data = await response.json();
+
+            if (response.status === 200) {
+                token = data.token;
+                authSection.style.display = 'none';
+                habitSection.style.display = 'block';
+                fetchHabits();
+            } else {
+                alert('Fejl under login.');
+            }
+        });
+
+        // Hent vaner
+        async function fetchHabits() {
+            const response = await fetch(`${apiUrl}/habits`, {
+                headers: {
+                    'Authorization': token
+                }
+            });
+
+            const habits = await response.json();
+            const habitList = document.getElementById('habit-list');
+            habitList.innerHTML = '';
+
+            habits.forEach(habit => {
+                const li = document.createElement('li');
+                li.textContent = `${habit.name} - ${habit.duration} timer (${habit.frequency})`;
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Slet';
+                deleteBtn.classList.add('delete-btn');
+                deleteBtn.onclick = () => deleteHabit(habit._id);
+                li.appendChild(deleteBtn);
+                habitList.appendChild(li);
+            });
+        }
+
+        // Tilføj vane
+        addHabitBtn.addEventListener('click', async () => {
+            const name = document.getElementById('habit-name').value;
+            const duration = document.getElementById('habit-duration').value;
+            const frequency = document.getElementById('habit-frequency').value;
+
+            const response = await fetch(`${apiUrl}/habits`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': token,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, duration, frequency })
+            });
+
+            if (response.status === 201) {
+                fetchHabits();
+                document.getElementById('habit-name').value = '';
+                document.getElementById('habit-duration').value = '';
+            } else {
+                alert('Fejl under tilføjelse af vane.');
+            }
+        });
+
+        // Slet vane
+        async function deleteHabit(habitId) {
+            const response = await fetch(`${apiUrl}/habits/${habitId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': token
+                }
+            });
+
+            if (response.status === 200) {
+                fetchHabits();
+            } else {
+                alert('Fejl under sletning af vane.');
+            }
+        }
+    </script>
+
+</body>
+</html>
