@@ -1,216 +1,101 @@
-<!DOCTYPE html>
-<html lang="da">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MJ Digital Marketing - Boost din forretning</title>
+const express = require('express');
+const session = require('express-session');
+const passport = require('passport');
+const GitHubStrategy = require('passport-github2').Strategy;
+const axios = require('axios');
+const path = require('path');
+require('dotenv').config();
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+const app = express();
 
-    <!-- Styling -->
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
+// Session handling
+app.use(session({
+  secret: 'supersecret',
+  resave: false,
+  saveUninitialized: true
+}));
 
-        header {
-            background-color: #000;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+// Passport configuration
+app.use(passport.initialize());
+app.use(passport.session());
 
-        /* Indsætter logo */
-        header .logo img {
-            width: 180px;
-            height: auto;
-        }
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-        }
+passport.deserializeUser((obj, done) => {
+  done(null, obj);
+});
 
-        nav ul li {
-            margin-left: 30px;
-        }
+// GitHub OAuth Strategy
+passport.use(new GitHubStrategy({
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: "http://localhost:3000/auth/github/callback"
+},
+(accessToken, refreshToken, profile, done) => {
+  profile.accessToken = accessToken;
+  return done(null, profile);
+}));
 
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
+// Serve static files (Frontend)
+app.use(express.static('public'));
 
-        nav ul li a:hover {
-            background-color: #ff6600;
-        }
+// GitHub OAuth route
+app.get('/auth/github',
+  passport.authenticate('github', { scope: ['user:email', 'repo'] })
+);
 
-        /* Hero Section */
-        .hero {
-            background: url('https://via.placeholder.com/1920x600?text=Boost+Din+Forretning+Med+MJ+Marketing') no-repeat center center/cover;
-            height: 600px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #fff;
-        }
+// GitHub OAuth callback
+app.get('/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/' }),
+  (req, res) => {
+    res.redirect('/dashboard');
+  }
+);
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-        }
+// Dashboard Route (Requires login)
+app.get('/dashboard', ensureAuthenticated, (req, res) => {
+  const accessToken = req.user.accessToken;
+  axios.get('https://api.github.com/user/repos', {
+    headers: { Authorization: `token ${accessToken}` }
+  })
+  .then(response => {
+    let repoList = '<h2>Your Repositories:</h2><ul>';
+    response.data.forEach(repo => {
+      repoList += `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a></li>`;
+    });
+    repoList += '</ul>';
+    res.send(`
+      <h1>Welcome ${req.user.username}</h1>
+      <a href="/logout">Logout</a>
+      ${repoList}
+    `);
+  })
+  .catch(err => res.send('Error fetching repositories'));
+});
 
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-        }
+// Logout Route
+app.get('/logout', (req, res) => {
+  req.logout(() => {});
+  res.redirect('/');
+});
 
-        .cta-btn {
-            background-color: #ff6600;
-            color: #fff;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
+// Ensure authenticated middleware
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/');
+}
 
-        .cta-btn:hover {
-            background-color: #333;
-        }
+// Frontend - index.html for login
+app.get('/', (req, res) => {
+  res.send(`
+    <h1>GitHub OAuth App</h1>
+    <a href="/auth/github">Login with GitHub</a>
+  `);
+});
 
-        section {
-            padding: 60px 20px;
-            text-align: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-        }
-
-        .services ul {
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            padding: 0;
-        }
-
-        .services ul li {
-            margin: 15px;
-            font-size: 1.2rem;
-            flex: 1 1 30%;
-            min-width: 200px;
-        }
-
-        /* Contact Form */
-        .contact-form form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        button {
-            background-color: #ff6600;
-            color: #fff;
-            border: none;
-            padding: 15px 30px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #333;
-        }
-
-        footer {
-            background-color: #000;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <img src="https://via.placeholder.com/180x60?text=Digital+Marketing+Pro+Logo" alt="MJ Digital Marketing Logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#hero">Forside</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Kontakt</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div>
-            <h1>Boost din forretning med MJ Digital Marketing</h1>
-            <p>Vi leverer strategier, der sikrer vækst og synlighed online.</p>
-            <a href="#services" class="cta-btn">Se vores tjenester</a>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <h2>Vores Tjenester</h2>
-        <ul>
-            <li><strong>SEO Optimering:</strong> Få flere besøgende og en højere placering på Google.</li>
-            <li><strong>Google Ads:</strong> Målrettede annoncer til potentielle kunder.</li>
-            <li><strong>Social Media Management:</strong> Byg din brand awareness gennem sociale medier.</li>
-        </ul>
-    </section>
-
-    <!-- Contact Form Section -->
-    <section class="contact-form" id="contact">
-        <h2>Kontakt os</h2>
-        <form action="https://formspree.io/f/{your_form_id}" method="POST">
-            <input type="text" id="name" name="name" placeholder="Dit navn" required>
-            <input type="email" id="email" name="email" placeholder="Din e-mail" required>
-            <textarea id="message" name="message" rows="5" placeholder="Din besked" required></textarea>
-            <button type="submit">Send besked</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 MJ Digital Marketing. Alle rettigheder forbeholdes.</p>
-    </footer>
-
-</body>
-</html>
+// Start server
+app.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
+});
