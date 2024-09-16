@@ -3,100 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub OAuth App</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Endless Runner Game</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        a {
-            text-decoration: none;
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
-        a:hover {
-            background-color: #218838;
-        }
-        #repo-list {
-            margin-top: 20px;
-            list-style: none;
+            margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #2b2e4a;
+            overflow: hidden;
         }
-        #repo-list li {
-            padding: 10px;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            text-align: left;
+
+        #game-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background-color: #2b2e4a;
+            overflow: hidden;
+        }
+
+        #player {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: yellow;
+            border-radius: 10px;
+            bottom: 20px;
+            left: 50px;
+        }
+
+        .obstacle {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            bottom: 20px;
+            animation: move-left 3s linear infinite;
+        }
+
+        .coin {
+            width: 30px;
+            height: 30px;
+            background-color: gold;
+            border-radius: 50%;
+            position: absolute;
+            animation: move-left 5s linear infinite;
+        }
+
+        @keyframes move-left {
+            from {
+                right: 0;
+            }
+            to {
+                right: 100%;
+            }
+        }
+
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
 
-    <h1>GitHub OAuth App</h1>
-    <p id="login-message">Log in to view your repositories</p>
-    <a id="login-button" href="#">Login with GitHub</a>
-
-    <ul id="repo-list"></ul>
+    <div id="game-container">
+        <div id="player"></div>
+        <div id="score">Score: 0</div>
+    </div>
 
     <script>
-        const clientId = 'YOUR_GITHUB_CLIENT_ID'; // Sæt din GitHub Client ID her
-        const redirectUri = window.location.origin + window.location.pathname; // Dette er din redirect URI
+        const player = document.getElementById("player");
+        const gameContainer = document.getElementById("game-container");
+        const scoreDisplay = document.getElementById("score");
+        let score = 0;
+        let isJumping = false;
+        let isSliding = false;
 
-        // Bygger GitHub OAuth URL til login
-        const githubOAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&scope=repo&redirect_uri=${redirectUri}`;
+        // Player movement: Jump and Slide
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowUp" && !isJumping) {
+                jump();
+            }
+            if (e.key === "ArrowDown" && !isSliding) {
+                slide();
+            }
+        });
 
-        document.getElementById('login-button').href = githubOAuthUrl;
-
-        // Tjekker om der er en kode i URL'en efter login
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-
-        if (code) {
-            document.getElementById('login-message').textContent = 'Fetching your repositories...';
-            document.getElementById('login-button').style.display = 'none';
-
-            // Få adgangstoken fra GitHub (note: du skal bruge en server-side proxy for dette i produktion)
-            fetch(`https://github.com/login/oauth/access_token?client_id=${clientId}&code=${code}`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                const accessToken = data.access_token;
-
-                // Hent repositories med adgangstoken
-                return fetch('https://api.github.com/user/repos', {
-                    headers: {
-                        Authorization: `token ${accessToken}`
-                    }
-                });
-            })
-            .then(response => response.json())
-            .then(repos => {
-                const repoList = document.getElementById('repo-list');
-                repoList.innerHTML = '';
-
-                repos.forEach(repo => {
-                    const listItem = document.createElement('li');
-                    listItem.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a>`;
-                    repoList.appendChild(listItem);
-                });
-            })
-            .catch(err => {
-                document.getElementById('login-message').textContent = 'Error fetching repositories. Please try again.';
-                console.error(err);
-            });
+        function jump() {
+            isJumping = true;
+            player.style.transition = "bottom 0.5s";
+            player.style.bottom = "150px";
+            setTimeout(() => {
+                player.style.bottom = "20px";
+                isJumping = false;
+            }, 500);
         }
-    </script>
 
+        function slide() {
+            isSliding = true;
+            player.style.height = "25px";
+            setTimeout(() => {
+                player.style.height = "50px";
+                isSliding = false;
+            }, 500);
+        }
+
+        // Obstacles and coins generation
+        function generateObstacle() {
+            const obstacle = document.createElement("div");
+            obstacle.classList.add("obstacle");
+            gameContainer.appendChild(obstacle);
+            obstacle.style.right = "-50px";
+            moveObstacle(obstacle);
+        }
+
+        function generateCoin() {
+            const coin = document.createElement("div");
+            coin.classList.add("coin");
+            gameContainer.appendChild(coin);
+            coin.style.right = "-50px";
+            moveCoin(coin);
+        }
+
+        function moveObstacle(obstacle) {
+            let obstacleInterval = setInterval(() => {
+                const obstaclePosition = obstacle.offsetLeft;
+
+                // Detect collision
+                if (obstaclePosition < player.offsetLeft + player.offsetWidth &&
+                    obstaclePosition + obstacle.offsetWidth > player.offsetLeft &&
+                    player.offsetTop + player.offsetHeight > obstacle.offsetTop) {
+                    alert("Game Over! Your Score: " + score);
+                    clearInterval(obstacleInterval);
+                    document.location.reload();
+                }
+
+                // Remove obstacle when off-screen
+                if (obstaclePosition < -50) {
+                    clearInterval(obstacleInterval);
+                    obstacle.remove();
+                    score += 10;
+                    scoreDisplay.textContent = `Score: ${score}`;
+                }
+
+                obstacle.style.left = `${obstaclePosition - 5}px`;
+            }, 20);
+        }
+
+        function moveCoin(coin) {
+            let coinInterval = setInterval(() => {
+                const coinPosition = coin.offsetLeft;
+
+                // Detect coin collection
+                if (coinPosition < player.offsetLeft + player.offsetWidth &&
+                    coinPosition + coin.offsetWidth > player.offsetLeft &&
+                    player.offsetTop + player.offsetHeight > coin.offsetTop) {
+                    coin.remove();
+                    score += 5;
+                    scoreDisplay.textContent = `Score: ${score}`;
+                }
+
+                // Remove coin when off-screen
+                if (coinPosition < -50) {
+                    clearInterval(coinInterval);
+                    coin.remove();
+                }
+
+                coin.style.left = `${coinPosition - 5}px`;
+            }, 20);
+        }
+
+        // Randomly generate obstacles and coins
+        setInterval(generateObstacle, 2000);
+        setInterval(generateCoin, 4000);
+
+    </script>
 </body>
 </html>
