@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MJ Digital Marketing - Skab vækst online</title>
+    <title>MJ Digital Marketing - Boost din forretning</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
     <!-- Styling -->
     <style>
-        /* Global styling */
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
+            background-color: #f4f4f4;
             color: #333;
         }
 
-        /* Header styling */
         header {
             background-color: #000;
-            color: #fff;
+            padding: 20px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
         }
 
+        /* Indsætter logo */
         header .logo img {
             width: 180px;
             height: auto;
@@ -37,12 +35,12 @@
         nav ul {
             list-style: none;
             display: flex;
-            gap: 20px;
             margin: 0;
+            padding: 0;
         }
 
         nav ul li {
-            margin: 0;
+            margin-left: 30px;
         }
 
         nav ul li a {
@@ -50,6 +48,7 @@
             text-decoration: none;
             font-weight: 600;
             padding: 10px 15px;
+            border-radius: 5px;
             transition: background-color 0.3s ease;
         }
 
@@ -57,16 +56,15 @@
             background-color: #ff6600;
         }
 
-        /* Hero section */
+        /* Hero Section */
         .hero {
-            background: url('https://via.placeholder.com/1920x600?text=MJ+Digital+Marketing+Boost+Your+Business') no-repeat center center/cover;
+            background: url('https://via.placeholder.com/1920x600?text=Boost+Din+Forretning+Med+MJ+Marketing') no-repeat center center/cover;
             height: 600px;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: #fff;
-            position: relative;
         }
 
         .hero h1 {
@@ -93,7 +91,6 @@
             background-color: #333;
         }
 
-        /* Section styling */
         section {
             padding: 60px 20px;
             text-align: center;
@@ -106,7 +103,6 @@
             margin-bottom: 30px;
         }
 
-        /* Services section */
         .services ul {
             list-style: none;
             display: flex;
@@ -116,12 +112,13 @@
         }
 
         .services ul li {
-            margin: 15px 0;
+            margin: 15px;
             font-size: 1.2rem;
             flex: 1 1 30%;
+            min-width: 200px;
         }
 
-        /* Contact form */
+        /* Contact Form */
         .contact-form form {
             display: flex;
             flex-direction: column;
@@ -155,12 +152,12 @@
             background-color: #333;
         }
 
-        /* Footer styling */
         footer {
             background-color: #000;
             color: #fff;
             padding: 20px;
             text-align: center;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -169,8 +166,7 @@
     <!-- Header -->
     <header>
         <div class="logo">
-            <!-- Brug det midlertidige logo -->
-            <img src="https://via.placeholder.com/180x60?text=Pro+Marketing+Logo" alt="MJ Digital Marketing Logo">
+            <img src="https://via.placeholder.com/180x60?text=Digital+Marketing+Pro+Logo" alt="MJ Digital Marketing Logo">
         </div>
         <nav>
             <ul>
@@ -200,7 +196,7 @@
         </ul>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact Form Section -->
     <section class="contact-form" id="contact">
         <h2>Kontakt os</h2>
         <form action="https://formspree.io/f/{your_form_id}" method="POST">
