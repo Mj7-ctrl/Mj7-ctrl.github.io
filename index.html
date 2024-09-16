@@ -3,68 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Marketing - Boost Din Forretning</title>
+    <title>Digital Marketing Agency - Boost Din Forretning</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Styling -->
     <style>
-        /* Generel styling */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f0f0f0;
+            color: #333;
         }
 
         header {
-            background-color: #333;
+            background-color: #1a1a1a;
+            padding: 20px 0;
             color: #fff;
-            padding: 10px 0;
             text-align: center;
         }
 
         header .logo img {
-            width: 150px;
+            width: 200px;
         }
 
         nav ul {
             list-style: none;
             padding: 0;
+            margin: 20px 0 0;
         }
 
         nav ul li {
-            display: inline;
+            display: inline-block;
             margin: 0 15px;
         }
 
         nav ul li a {
             color: #fff;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 8px 12px;
+            transition: background-color 0.3s ease;
         }
 
-        .hero {
+        nav ul li a:hover {
             background-color: #ff6600;
-            color: #fff;
-            padding: 100px 20px;
+            border-radius: 4px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://via.placeholder.com/1920x600?text=Professional+Marketing+Strategy') no-repeat center center/cover;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            color: #fff;
         }
 
         .hero h1 {
-            font-size: 3rem;
-            margin: 0;
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
         }
 
         .cta-btn {
-            background-color: #333;
+            background-color: #ff6600;
             color: #fff;
-            padding: 10px 20px;
+            padding: 15px 30px;
             text-decoration: none;
+            font-weight: 600;
             border-radius: 5px;
-            display: inline-block;
-            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: #333;
+        }
+
+        /* Sections */
+        section {
+            padding: 60px 20px;
+            text-align: center;
         }
 
         .intro, .services, .contact-form {
-            padding: 40px 20px;
-            text-align: center;
+            background-color: #fff;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
         }
 
         .services ul {
@@ -81,30 +121,45 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 20px;
         }
 
         form input, form textarea {
             width: 80%;
-            padding: 10px;
+            padding: 15px;
             margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
         }
 
         button {
             background-color: #ff6600;
             color: #fff;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 30px;
             cursor: pointer;
             border-radius: 5px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #333;
         }
 
         footer {
-            background-color: #333;
+            background-color: #1a1a1a;
             color: #fff;
-            padding: 10px;
+            padding: 20px;
             text-align: center;
+            font-size: 0.9rem;
         }
 
+        footer p {
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -112,8 +167,7 @@
     <!-- Header -->
     <header>
         <div class="logo">
-            <!-- Professionelt logo -->
-            <img src="https://via.placeholder.com/150x50?text=Digital+Marketing+Logo" alt="Digital Marketing Logo">
+            <img src="https://via.placeholder.com/200x60?text=Digital+Marketing+Pro+Logo" alt="Digital Marketing Logo">
         </div>
         <nav>
             <ul>
@@ -126,50 +180,45 @@
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
-        <h1>Få flere kunder med effektiv digital markedsføring</h1>
-        <p>Vi hjælper virksomheder med at vækste gennem SEO, annoncering og indholdsstrategi.</p>
-        <a href="#services" class="cta-btn">Se vores tjenester</a>
+        <div>
+            <h1>Boost din forretning med digital markedsføring</h1>
+            <p>Professionelle strategier til at få flere kunder og øge din synlighed online</p>
+            <a href="#services" class="cta-btn">Se vores tjenester</a>
+        </div>
     </section>
 
     <!-- Intro Section -->
     <section class="intro">
         <h2>Hvorfor vælge os?</h2>
-        <p>Vi tilbyder skræddersyede løsninger, der passer perfekt til din virksomhed. Med mange års erfaring inden for digital markedsføring er vi din foretrukne partner.</p>
+        <p>Vi er eksperter i digital markedsføring med mange års erfaring, der sikrer skræddersyede løsninger, der passer perfekt til din virksomhed.</p>
     </section>
 
     <!-- Services Section -->
     <section class="services" id="services">
-        <h1>Vores Tjenester</h1>
+        <h2>Vores Tjenester</h2>
         <ul>
-            <li><strong>SEO Optimering:</strong> Øg din synlighed på Google og få flere organiske besøgende.</li>
-            <li><strong>Google Ads (PPC):</strong> Få målrettet trafik gennem betalte annoncer.</li>
-            <li><strong>Social Media Management:</strong> Byg dit brand på sociale medier som Facebook og Instagram.</li>
-            <li><strong>Indholdsmarkedsføring:</strong> Skab værdifuldt indhold, der engagerer dine kunder.</li>
-            <li><strong>E-mail Markedsføring:</strong> Automatisér og personaliser dine e-mails for maksimal effekt.</li>
+            <li><strong>SEO Optimering:</strong> Få flere besøgende og en højere placering på Google.</li>
+            <li><strong>Google Ads:</strong> Målrettede annoncer til potentielle kunder.</li>
+            <li><strong>Social Media Management:</strong> Byg din brand awareness gennem sociale medier.</li>
+            <li><strong>Indholdsmarkedsføring:</strong> Skab værdi og engagement gennem kvalitetsindhold.</li>
+            <li><strong>E-mail Marketing:</strong> Øg kundeloyalitet med personaliserede e-mail kampagner.</li>
         </ul>
-        <a href="#contact" class="cta-btn">Kontakt os for en strategi</a>
     </section>
 
     <!-- Contact Section -->
     <section class="contact-form" id="contact">
-        <h1>Kontakt os</h1>
+        <h2>Kontakt os</h2>
         <form action="https://formspree.io/f/{your_form_id}" method="POST">
-            <label for="name">Navn:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Besked:</label>
-            <textarea id="message" name="message" required></textarea>
-
+            <input type="text" id="name" name="name" placeholder="Dit navn" required>
+            <input type="email" id="email" name="email" placeholder="Din e-mail" required>
+            <textarea id="message" name="message" rows="5" placeholder="Din besked" required></textarea>
             <button type="submit">Send besked</button>
         </form>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Digital Marketing. Alle rettigheder forbeholdes.</p>
+        <p>&copy; 2024 Digital Marketing Agency. Alle rettigheder forbeholdes.</p>
     </footer>
 
 </body>
