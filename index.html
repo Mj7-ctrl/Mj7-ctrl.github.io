@@ -3,224 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subway Surfers Style Game</title>
+    <title>Habit Optimization App</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            background-color: #2b2e4a;
-            font-family: sans-serif;
-        }
-
-        #game-container {
-            width: 100vw;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
-            position: relative;
-            background-color: #2b2e4a;
-            perspective: 1000px;
+            box-sizing: border-box;
         }
 
-        /* 3D Runner */
-        #runner {
-            position: absolute;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 120px;
-            background: url('https://path-to-your-character-sprite.png') no-repeat;
-            background-size: contain;
-            animation: run-animation 0.3s steps(4) infinite;
+        .container {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            border-radius: 8px;
+            margin: 20px;
         }
 
-        @keyframes run-animation {
-            from {
-                background-position: 0px;
-            }
-            to {
-                background-position: -320px;
-            }
+        h1 {
+            text-align: center;
+            font-size: 1.5em;
         }
 
-        /* Lanes */
-        .lane {
-            position: absolute;
-            width: 33vw;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.05);
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
 
-        .lane:nth-child(1) {
-            left: 0;
-        }
-
-        .lane:nth-child(2) {
-            left: 33vw;
-        }
-
-        .lane:nth-child(3) {
-            left: 66vw;
-        }
-
-        /* Obstacles */
-        .obstacle {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background-color: red;
-            bottom: 100px;
-            animation: move-obstacle 4s linear infinite;
-        }
-
-        @keyframes move-obstacle {
-            from {
-                bottom: 100vh;
-            }
-            to {
-                bottom: -100px;
-            }
-        }
-
-        /* Coins */
-        .coin {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background-color: gold;
-            border-radius: 50%;
-            bottom: 100px;
-            animation: move-coin 4s linear infinite;
-        }
-
-        @keyframes move-coin {
-            from {
-                bottom: 100vh;
-            }
-            to {
-                bottom: -50px;
-            }
-        }
-
-        /* Scoring */
-        #score {
-            position: absolute;
-            top: 20px;
-            left: 20px;
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
             color: white;
-            font-size: 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .optimize-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .optimize-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        .suggestion {
+            background-color: #ffc107;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            text-align: center;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
-    <div id="game-container">
-        <div id="score">Score: 0</div>
-        <div id="runner"></div>
-        <div class="lane"></div>
-        <div class="lane"></div>
-        <div class="lane"></div>
+
+    <div class="container">
+        <h1>Habit Optimization</h1>
+
+        <input type="text" id="habit-input" placeholder="Tilføj vane (f.eks. Søvn, Træning)">
+        <input type="number" id="duration-input" placeholder="Varighed i timer">
+        <select id="frequency-input">
+            <option value="daglig">Daglig</option>
+            <option value="ugentlig">Ugentlig</option>
+            <option value="månedlig">Månedlig</option>
+        </select>
+        <button id="add-habit-btn">Tilføj vane</button>
+
+        <ul id="habit-list"></ul>
+
+        <div id="suggestion-box" class="suggestion" style="display:none;">
+            Forslag: Du kan overveje at øge din træningsvarighed til 1 time om dagen!
+        </div>
     </div>
 
     <script>
-        const runner = document.getElementById("runner");
-        const gameContainer = document.getElementById("game-container");
-        const scoreDisplay = document.getElementById("score");
-        let score = 0;
-        let currentLane = 1; // Start in the middle lane
-        let isJumping = false;
-        let isSliding = false;
+        const habitInput = document.getElementById('habit-input');
+        const durationInput = document.getElementById('duration-input');
+        const frequencyInput = document.getElementById('frequency-input');
+        const addHabitBtn = document.getElementById('add-habit-btn');
+        const habitList = document.getElementById('habit-list');
+        const suggestionBox = document.getElementById('suggestion-box');
 
-        function moveRunner(lane) {
-            const laneLeft = (lane * 33) + "vw";
-            runner.style.left = `calc(${laneLeft} - 40px)`;
+        let habits = JSON.parse(localStorage.getItem('habits')) || [];
+
+        function renderHabits() {
+            habitList.innerHTML = '';
+            habits.forEach((habit, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = \`
+                    \${habit.name} - \${habit.duration} timer (\${habit.frequency})
+                    <button class="optimize-btn" onclick="optimizeHabit(\${index})">Optimer</button>
+                    <button class="delete-btn" onclick="deleteHabit(\${index})">Slet</button>
+                \`;
+                habitList.appendChild(li);
+            });
         }
 
-        function jump() {
-            if (isJumping) return;
-            isJumping = true;
-            runner.style.transition = "bottom 0.5s";
-            runner.style.bottom = "300px";
-            setTimeout(() => {
-                runner.style.bottom = "100px";
-                isJumping = false;
-            }, 500);
-        }
+        function addHabit() {
+            const habitName = habitInput.value.trim();
+            const habitDuration = durationInput.value;
+            const habitFrequency = frequencyInput.value;
 
-        function slide() {
-            if (isSliding) return;
-            isSliding = true;
-            runner.style.height = "60px";
-            setTimeout(() => {
-                runner.style.height = "120px";
-                isSliding = false;
-            }, 500);
-        }
-
-        // Obstacle generation
-        function generateObstacle() {
-            const obstacle = document.createElement("div");
-            obstacle.classList.add("obstacle");
-            obstacle.style.left = `${Math.floor(Math.random() * 3) * 33}vw`;
-            gameContainer.appendChild(obstacle);
-            setTimeout(() => obstacle.remove(), 4000); // Remove after animation
-        }
-
-        // Coin generation
-        function generateCoin() {
-            const coin = document.createElement("div");
-            coin.classList.add("coin");
-            coin.style.left = `${Math.floor(Math.random() * 3) * 33}vw`;
-            gameContainer.appendChild(coin);
-            setTimeout(() => coin.remove(), 4000); // Remove after animation
-        }
-
-        // Randomly generate obstacles and coins
-        setInterval(generateObstacle, 3000);
-        setInterval(generateCoin, 5000);
-
-        // Scoring system
-        setInterval(() => {
-            score++;
-            scoreDisplay.textContent = `Score: ${score}`;
-        }, 1000);
-
-        // Swipe and key controls
-        window.addEventListener("keydown", (e) => {
-            if (e.key === "ArrowUp") jump();
-            if (e.key === "ArrowDown") slide();
-            if (e.key === "ArrowRight" && currentLane < 2) {
-                currentLane++;
-                moveRunner(currentLane);
+            if (habitName && habitDuration) {
+                habits.push({ name: habitName, duration: habitDuration, frequency: habitFrequency });
+                saveHabits();
+                renderHabits();
+                habitInput.value = '';
+                durationInput.value = '';
             }
-            if (e.key === "ArrowLeft" && currentLane > 0) {
-                currentLane--;
-                moveRunner(currentLane);
-            }
-        });
+        }
 
-        // Touch controls for mobile
-        let startX, startY, endX, endY;
-        document.addEventListener("touchstart", (e) => {
-            startX = e.changedTouches[0].screenX;
-            startY = e.changedTouches[0].screenY;
-        });
+        function deleteHabit(index) {
+            habits.splice(index, 1);
+            saveHabits();
+            renderHabits();
+        }
 
-        document.addEventListener("touchend", (e) => {
-            endX = e.changedTouches[0].screenX;
-            endY = e.changedTouches[0].screenY;
+        function optimizeHabit(index) {
+            suggestionBox.style.display = 'block';
+        }
 
-            if (endX - startX > 50 && currentLane < 2) {
-                currentLane++;
-                moveRunner(currentLane);
-            } else if (startX - endX > 50 && currentLane > 0) {
-                currentLane--;
-                moveRunner(currentLane);
-            } else if (startY - endY > 50) {
-                jump();
-            } else if (endY - startY > 50) {
-                slide();
-            }
-        });
+        function saveHabits() {
+            localStorage.setItem('habits', JSON.stringify(habits));
+        }
+
+        addHabitBtn.addEventListener('click', addHabit);
+        renderHabits();
     </script>
+
 </body>
 </html>
