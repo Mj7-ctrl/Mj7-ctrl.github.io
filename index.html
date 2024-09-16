@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habit Optimization App</title>
+    <title>Advanced Habit Optimization App</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -29,7 +29,6 @@
 
         h1 {
             text-align: center;
-            font-size: 1.5em;
         }
 
         input[type="text"], input[type="number"], select {
@@ -108,25 +107,40 @@
 <body>
 
     <div class="container">
-        <h1>Habit Optimization</h1>
+        <h1>Advanced Habit Optimization</h1>
+        <div id="login-section">
+            <h3>Log ind</h3>
+            <input type="text" id="username" placeholder="Brugernavn">
+            <input type="password" id="password" placeholder="Adgangskode">
+            <button id="login-btn">Log ind</button>
+        </div>
+        <div id="app-section" style="display:none;">
+            <h3>Velkommen, <span id="username-display"></span></h3>
+            <input type="text" id="habit-input" placeholder="Tilføj vane (f.eks. Søvn, Træning)">
+            <input type="number" id="duration-input" placeholder="Varighed i timer">
+            <select id="frequency-input">
+                <option value="daglig">Daglig</option>
+                <option value="ugentlig">Ugentlig</option>
+                <option value="månedlig">Månedlig</option>
+            </select>
+            <button id="add-habit-btn">Tilføj vane</button>
 
-        <input type="text" id="habit-input" placeholder="Tilføj vane (f.eks. Søvn, Træning)">
-        <input type="number" id="duration-input" placeholder="Varighed i timer">
-        <select id="frequency-input">
-            <option value="daglig">Daglig</option>
-            <option value="ugentlig">Ugentlig</option>
-            <option value="månedlig">Månedlig</option>
-        </select>
-        <button id="add-habit-btn">Tilføj vane</button>
+            <ul id="habit-list"></ul>
 
-        <ul id="habit-list"></ul>
-
-        <div id="suggestion-box" class="suggestion" style="display:none;">
-            Forslag: Du kan overveje at øge din træningsvarighed til 1 time om dagen!
+            <div id="suggestion-box" class="suggestion" style="display:none;">
+                Forslag: Du kan overveje at øge din træningsvarighed til 1 time om dagen!
+            </div>
         </div>
     </div>
 
     <script>
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('login-btn');
+        const loginSection = document.getElementById('login-section');
+        const appSection = document.getElementById('app-section');
+        const usernameDisplay = document.getElementById('username-display');
+
         const habitInput = document.getElementById('habit-input');
         const durationInput = document.getElementById('duration-input');
         const frequencyInput = document.getElementById('frequency-input');
@@ -135,6 +149,27 @@
         const suggestionBox = document.getElementById('suggestion-box');
 
         let habits = JSON.parse(localStorage.getItem('habits')) || [];
+
+        // Simulated backend: user authentication
+        const users = [
+            { username: 'test', password: '12345' },
+            { username: 'demo', password: 'password' }
+        ];
+
+        loginBtn.addEventListener('click', function () {
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                loginSection.style.display = 'none';
+                appSection.style.display = 'block';
+                usernameDisplay.textContent = user.username;
+                renderHabits();
+            } else {
+                alert('Forkert brugernavn eller adgangskode');
+            }
+        });
 
         function renderHabits() {
             habitList.innerHTML = '';
@@ -178,7 +213,6 @@
         }
 
         addHabitBtn.addEventListener('click', addHabit);
-        renderHabits();
     </script>
 
 </body>
