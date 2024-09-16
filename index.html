@@ -3,60 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Endless Runner Game</title>
+    <title>Endless Runner Subway Style</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #2b2e4a;
             overflow: hidden;
+            background-color: #2b2e4a;
         }
 
         #game-container {
             width: 100vw;
             height: 100vh;
+            overflow: hidden;
             position: relative;
             background-color: #2b2e4a;
-            overflow: hidden;
         }
 
         #player {
             position: absolute;
             width: 50px;
-            height: 50px;
+            height: 100px;
             background-color: yellow;
-            border-radius: 10px;
-            bottom: 20px;
-            left: 50px;
+            bottom: 0;
+            left: calc(50% - 25px);
+            transition: left 0.3s;
         }
 
-        .obstacle {
+        .lane {
+            position: absolute;
+            width: 33.33vw;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .lane:nth-child(2) {
+            left: 33.33vw;
+        }
+
+        .lane:nth-child(3) {
+            left: 66.66vw;
+        }
+
+        #obstacle {
+            position: absolute;
             width: 50px;
-            height: 50px;
+            height: 100px;
             background-color: red;
-            position: absolute;
-            bottom: 20px;
-            animation: move-left 3s linear infinite;
-        }
-
-        .coin {
-            width: 30px;
-            height: 30px;
-            background-color: gold;
-            border-radius: 50%;
-            position: absolute;
-            animation: move-left 5s linear infinite;
-        }
-
-        @keyframes move-left {
-            from {
-                right: 0;
-            }
-            to {
-                right: 100%;
-            }
+            bottom: 0;
+            animation: move 3s linear infinite;
         }
 
         #score {
@@ -66,13 +62,25 @@
             color: white;
             font-size: 24px;
         }
+
+        @keyframes move {
+            from {
+                top: 100%;
+            }
+            to {
+                top: 0;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div id="game-container">
-        <div id="player"></div>
         <div id="score">Score: 0</div>
+        <div id="player"></div>
+        <div class="lane"></div>
+        <div class="lane"></div>
+        <div class="lane"></div>
     </div>
 
     <script>
@@ -80,107 +88,89 @@
         const gameContainer = document.getElementById("game-container");
         const scoreDisplay = document.getElementById("score");
         let score = 0;
-        let isJumping = false;
-        let isSliding = false;
+        let currentLane = 1; // Start in the middle lane
 
-        // Player movement: Jump and Slide
-        window.addEventListener("keydown", (e) => {
-            if (e.key === "ArrowUp" && !isJumping) {
-                jump();
-            }
-            if (e.key === "ArrowDown" && !isSliding) {
-                slide();
-            }
-        });
-
-        function jump() {
-            isJumping = true;
-            player.style.transition = "bottom 0.5s";
-            player.style.bottom = "150px";
-            setTimeout(() => {
-                player.style.bottom = "20px";
-                isJumping = false;
-            }, 500);
+        function movePlayer(lane) {
+            const playerLeft = (lane * 33.33) + "vw";
+            player.style.left = `calc(${playerLeft} - 25px)`;
         }
 
-        function slide() {
-            isSliding = true;
-            player.style.height = "25px";
-            setTimeout(() => {
-                player.style.height = "50px";
-                isSliding = false;
-            }, 500);
-        }
-
-        // Obstacles and coins generation
         function generateObstacle() {
             const obstacle = document.createElement("div");
             obstacle.classList.add("obstacle");
+            obstacle.style.left = `${Math.floor(Math.random() * 3) * 33.33}vw`;
             gameContainer.appendChild(obstacle);
-            obstacle.style.right = "-50px";
-            moveObstacle(obstacle);
-        }
 
-        function generateCoin() {
-            const coin = document.createElement("div");
-            coin.classList.add("coin");
-            gameContainer.appendChild(coin);
-            coin.style.right = "-50px";
-            moveCoin(coin);
-        }
+            let moveObstacle = setInterval(() => {
+                const obstaclePos = obstacle.getBoundingClientRect().top;
 
-        function moveObstacle(obstacle) {
-            let obstacleInterval = setInterval(() => {
-                const obstaclePosition = obstacle.offsetLeft;
+                if (obstaclePos <= 0) {
+                    obstacle.remove();
+                    clearInterval(moveObstacle);
+                    score += 1;
+                    scoreDisplay.textContent = `Score: ${score}`;
+                }
 
-                // Detect collision
-                if (obstaclePosition < player.offsetLeft + player.offsetWidth &&
-                    obstaclePosition + obstacle.offsetWidth > player.offsetLeft &&
-                    player.offsetTop + player.offsetHeight > obstacle.offsetTop) {
-                    alert("Game Over! Your Score: " + score);
-                    clearInterval(obstacleInterval);
+                const playerPos = player.getBoundingClientRect();
+                if (
+                    obstaclePos < playerPos.bottom &&
+                    obstacle.getBoundingClientRect().left === playerPos.left
+                ) {
+                    alert("Game Over! Final Score: " + score);
+                    clearInterval(moveObstacle);
                     document.location.reload();
                 }
-
-                // Remove obstacle when off-screen
-                if (obstaclePosition < -50) {
-                    clearInterval(obstacleInterval);
-                    obstacle.remove();
-                    score += 10;
-                    scoreDisplay.textContent = `Score: ${score}`;
-                }
-
-                obstacle.style.left = `${obstaclePosition - 5}px`;
             }, 20);
         }
 
-        function moveCoin(coin) {
-            let coinInterval = setInterval(() => {
-                const coinPosition = coin.offsetLeft;
-
-                // Detect coin collection
-                if (coinPosition < player.offsetLeft + player.offsetWidth &&
-                    coinPosition + coin.offsetWidth > player.offsetLeft &&
-                    player.offsetTop + player.offsetHeight > coin.offsetTop) {
-                    coin.remove();
-                    score += 5;
-                    scoreDisplay.textContent = `Score: ${score}`;
-                }
-
-                // Remove coin when off-screen
-                if (coinPosition < -50) {
-                    clearInterval(coinInterval);
-                    coin.remove();
-                }
-
-                coin.style.left = `${coinPosition - 5}px`;
-            }, 20);
-        }
-
-        // Randomly generate obstacles and coins
         setInterval(generateObstacle, 2000);
-        setInterval(generateCoin, 4000);
 
+        // Swipe controls
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+
+        function handleGesture() {
+            const diffX = touchEndX - touchStartX;
+            const diffY = touchEndY - touchStartY;
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                if (diffX > 0) {
+                    // Swipe Right
+                    if (currentLane < 2) {
+                        currentLane += 1;
+                        movePlayer(currentLane);
+                    }
+                } else {
+                    // Swipe Left
+                    if (currentLane > 0) {
+                        currentLane -= 1;
+                        movePlayer(currentLane);
+                    }
+                }
+            } else {
+                if (diffY > 0) {
+                    // Swipe Down
+                    // Slide action can be implemented here
+                } else {
+                    // Swipe Up
+                    // Jump action can be implemented here
+                }
+            }
+        }
+
+        document.addEventListener("touchstart", (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener("touchend", (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleGesture();
+        });
     </script>
+
 </body>
 </html>
