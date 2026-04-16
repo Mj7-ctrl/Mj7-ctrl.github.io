@@ -17,17 +17,53 @@
     </div>
 
     <div class="status" id="status">tap to begin</div>
+    <div class="caption" id="caption"></div>
+
+    <div class="bottombar">
+        <button class="icon-btn" id="mic-btn" title="Mic">🎙</button>
+        <input type="text" id="text-input" placeholder="Skriv til Jarvis…" autocomplete="off" />
+        <button class="icon-btn" id="send-btn" title="Send">➤</button>
+        <button class="icon-btn" id="settings-btn" title="Indstillinger">⚙</button>
+    </div>
 
     <div class="corner">
-        <button id="lang-btn" title="Sprog">EN</button>
-        <button id="mute-btn" title="Mute">on</button>
+        <button id="lang-btn">EN</button>
+        <button id="mute-btn">🔊</button>
     </div>
 
     <div class="overlay" id="overlay">
         <div class="overlay-inner">
             <div class="title">JARVIS</div>
             <button class="start-btn" id="start-btn">tap to begin</button>
-            <div class="note">Tillad mikrofon når din browser spørger.</div>
+            <div class="note">Tillad mikrofon hvis browseren spørger.</div>
+        </div>
+    </div>
+
+    <div class="overlay settings-overlay hidden" id="settings-overlay">
+        <div class="settings-panel">
+            <h2>Indstillinger</h2>
+            <label>Dit navn
+                <input type="text" id="name-input" placeholder="Sir">
+            </label>
+            <label>Anthropic API-nøgle <span class="hint">(valgfri — giver ægte AI-svar)</span>
+                <input type="password" id="api-key-input" placeholder="sk-ant-…">
+            </label>
+            <label>Model
+                <select id="model-select">
+                    <option value="claude-haiku-4-5-20251001">Haiku 4.5 (hurtig)</option>
+                    <option value="claude-sonnet-4-6">Sonnet 4.6</option>
+                    <option value="claude-opus-4-7">Opus 4.7 (smartest)</option>
+                </select>
+            </label>
+            <div class="help">
+                <p>Uden API-nøgle bruger Jarvis kun lokale kommandoer.</p>
+                <p>Med nøgle svarer han intelligent på alt, i Jarvis-stil.</p>
+                <p>Få en nøgle på <a href="https://console.anthropic.com/" target="_blank">console.anthropic.com</a></p>
+            </div>
+            <div class="btn-row">
+                <button id="settings-save">Gem</button>
+                <button id="settings-close">Luk</button>
+            </div>
         </div>
     </div>
 
