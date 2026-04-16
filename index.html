@@ -2,87 +2,36 @@
 <html lang="da">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J.A.R.V.I.S. — Personlig Assistent</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>J.A.R.V.I.S.</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="stars"></div>
+    <canvas id="blob"></canvas>
 
-    <header class="topbar">
-        <div class="brand">
-            <span class="logo">J.A.R.V.I.S.</span>
-            <span class="subtitle">Just A Rather Very Intelligent System</span>
+    <div class="hud top-left">
+        <span class="dot" id="conn-dot"></span>
+        <span id="conn-text">connected</span>
+    </div>
+    <div class="hud top-right">
+        <span id="clock">--:--</span>
+    </div>
+
+    <div class="status" id="status">tap to begin</div>
+
+    <button class="lang-btn" id="lang-btn" title="Sprog">EN</button>
+    <button class="mute-btn" id="mute-btn" title="Mute">🔊</button>
+
+    <div class="overlay" id="overlay">
+        <div class="overlay-inner">
+            <div class="title">J.A.R.V.I.S.</div>
+            <div class="sub">Just A Rather Very Intelligent System</div>
+            <button class="start-btn" id="start-btn">Tap to begin</button>
+            <div class="note">Kræver mikrofon-adgang. Brug Chrome, Safari eller Edge.</div>
         </div>
-        <div class="status">
-            <span id="clock">--:--:--</span>
-            <span id="connection" class="online">ONLINE</span>
-        </div>
-    </header>
-
-    <main class="stage">
-        <section class="panel left">
-            <h3>System</h3>
-            <ul class="sys-list">
-                <li>Bruger: <span id="user-name">Sir</span></li>
-                <li>Sprog: <span id="lang-label">Dansk</span></li>
-                <li>Dato: <span id="today">--</span></li>
-                <li>Batteri: <span id="battery">--</span></li>
-                <li>Netværk: <span id="network">--</span></li>
-            </ul>
-            <h3>Hurtig-kommandoer</h3>
-            <div class="quick">
-                <button data-cmd="hvad er klokken">Tid</button>
-                <button data-cmd="hvilken dato er det">Dato</button>
-                <button data-cmd="fortæl en vittighed">Vittighed</button>
-                <button data-cmd="åbn youtube">YouTube</button>
-                <button data-cmd="søg efter claude ai">Søg</button>
-                <button data-cmd="lav en note køb mælk">Note</button>
-                <button data-cmd="vis noter">Vis noter</button>
-                <button data-cmd="timer 1 minut">Timer</button>
-            </div>
-        </section>
-
-        <section class="core">
-            <div class="orb" id="orb">
-                <div class="ring r1"></div>
-                <div class="ring r2"></div>
-                <div class="ring r3"></div>
-                <div class="pulse"></div>
-                <div class="label" id="orb-label">KLAR</div>
-            </div>
-            <div class="hint" id="hint">Tryk på mikrofonen eller skriv en besked…</div>
-        </section>
-
-        <section class="panel right">
-            <h3>Samtale</h3>
-            <div class="chat" id="chat"></div>
-            <form class="composer" id="composer">
-                <button type="button" id="mic-btn" title="Tal">🎙</button>
-                <input type="text" id="input" placeholder="Spørg Jarvis om noget…" autocomplete="off" />
-                <button type="submit" id="send-btn" title="Send">➤</button>
-            </form>
-            <div class="settings">
-                <label>
-                    <input type="checkbox" id="voice-toggle" checked> Stemme
-                </label>
-                <label>
-                    <input type="checkbox" id="handsfree-toggle"> Håndfri
-                </label>
-                <label>
-                    <select id="lang-select">
-                        <option value="en-GB">English (Jarvis)</option>
-                        <option value="da-DK">Dansk</option>
-                    </select>
-                </label>
-                <button type="button" id="clear-btn">Ryd</button>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footbar">
-        <span>Tip: Slå "Håndfri" til for at tale frit med Jarvis — eller tryk mikrofonen.</span>
-    </footer>
+    </div>
 
     <script src="jarvis.js"></script>
 </body>
