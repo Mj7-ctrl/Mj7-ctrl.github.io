@@ -5,31 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>J.A.R.V.I.S.</title>
+    <title>JARVIS</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <canvas id="blob"></canvas>
 
-    <div class="hud top-left">
+    <div class="hud">
         <span class="dot" id="conn-dot"></span>
         <span id="conn-text">connected</span>
-    </div>
-    <div class="hud top-right">
-        <span id="clock">--:--</span>
     </div>
 
     <div class="status" id="status">tap to begin</div>
 
-    <button class="lang-btn" id="lang-btn" title="Sprog">EN</button>
-    <button class="mute-btn" id="mute-btn" title="Mute">🔊</button>
+    <div class="corner">
+        <button id="lang-btn" title="Sprog">EN</button>
+        <button id="mute-btn" title="Mute">on</button>
+    </div>
 
     <div class="overlay" id="overlay">
         <div class="overlay-inner">
-            <div class="title">J.A.R.V.I.S.</div>
-            <div class="sub">Just A Rather Very Intelligent System</div>
-            <button class="start-btn" id="start-btn">Tap to begin</button>
-            <div class="note">Kræver mikrofon-adgang. Brug Chrome, Safari eller Edge.</div>
+            <div class="title">JARVIS</div>
+            <button class="start-btn" id="start-btn">tap to begin</button>
+            <div class="note">Tillad mikrofon når din browser spørger.</div>
         </div>
     </div>
 

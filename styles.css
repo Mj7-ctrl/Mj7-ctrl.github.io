@@ -6,7 +6,7 @@ html, body {
     background: #000;
     overflow: hidden;
     font-family: "SF Pro Display", "Helvetica Neue", -apple-system, sans-serif;
-    color: #b9d9ff;
+    color: #7fa9d8;
     -webkit-user-select: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
@@ -24,78 +24,66 @@ html, body {
 .hud {
     position: fixed;
     z-index: 3;
+    top: 18px;
+    right: 20px;
     font-size: 12px;
-    letter-spacing: 2px;
-    color: #6a8aa8;
-    font-family: "SF Mono", "Consolas", monospace;
-    text-transform: lowercase;
+    letter-spacing: 1px;
+    color: #7fa9d8;
+    font-family: "SF Mono", "Menlo", monospace;
     display: flex;
     align-items: center;
     gap: 8px;
 }
-.hud.top-left { top: 20px; left: 22px; }
-.hud.top-right { top: 20px; right: 22px; }
 
 .dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: #3afcaa;
-    box-shadow: 0 0 8px #3afcaa;
-    display: inline-block;
+    box-shadow: 0 0 6px #3afcaa;
 }
-.dot.offline { background: #ff4d6d; box-shadow: 0 0 8px #ff4d6d; }
+.dot.offline { background: #ff4d6d; box-shadow: 0 0 6px #ff4d6d; }
 
 .status {
     position: fixed;
     z-index: 3;
     left: 50%;
-    bottom: 18vh;
+    top: 64%;
     transform: translateX(-50%);
-    font-size: 14px;
-    letter-spacing: 5px;
-    color: #6a8aa8;
-    text-transform: lowercase;
-    font-family: "SF Mono", "Consolas", monospace;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #8bb4e0;
+    font-family: "SF Mono", "Menlo", monospace;
     white-space: nowrap;
-    transition: opacity 0.25s, color 0.25s;
+    transition: opacity 0.3s, color 0.3s;
 }
-.status.listening { color: #3afcaa; text-shadow: 0 0 12px #3afcaa; }
-.status.speaking { color: #5ed1ff; text-shadow: 0 0 12px #5ed1ff; }
-.status.thinking { color: #b891ff; text-shadow: 0 0 12px #b891ff; }
-.status.error { color: #ff6a86; }
 
-.lang-btn, .mute-btn {
+.corner {
     position: fixed;
     z-index: 3;
     bottom: 22px;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 1px solid rgba(150, 200, 255, 0.2);
-    background: rgba(10, 20, 35, 0.6);
-    backdrop-filter: blur(10px);
-    color: #9fc3e8;
-    cursor: pointer;
-    font-size: 12px;
-    font-family: inherit;
+    right: 22px;
+    display: flex;
+    gap: 10px;
+}
+.corner button {
+    background: transparent;
+    border: 1px solid rgba(127, 169, 216, 0.25);
+    color: #7fa9d8;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
     letter-spacing: 1px;
-    transition: all 0.15s;
+    cursor: pointer;
+    font-family: inherit;
 }
-.lang-btn { left: 22px; }
-.mute-btn { right: 22px; font-size: 16px; }
-.lang-btn:hover, .mute-btn:hover {
-    background: rgba(30, 60, 100, 0.7);
-    box-shadow: 0 0 12px rgba(100, 200, 255, 0.3);
-}
-.mute-btn.muted { opacity: 0.4; }
+.corner button:active { background: rgba(127, 169, 216, 0.15); }
 
 .overlay {
     position: fixed;
     inset: 0;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
+    background: #000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,45 +93,28 @@ html, body {
 
 .overlay-inner { text-align: center; }
 .title {
-    font-size: 42px;
-    font-weight: 300;
-    letter-spacing: 14px;
+    font-size: 38px;
+    font-weight: 200;
+    letter-spacing: 12px;
     color: #6ed4ff;
-    text-shadow: 0 0 25px rgba(110, 212, 255, 0.6);
-    margin-bottom: 10px;
-}
-.sub {
-    font-size: 12px;
-    letter-spacing: 4px;
-    color: #5e7c9c;
-    text-transform: lowercase;
+    text-shadow: 0 0 20px rgba(110, 212, 255, 0.5);
     margin-bottom: 40px;
 }
 .start-btn {
-    padding: 16px 40px;
+    padding: 14px 36px;
     background: transparent;
     border: 1px solid rgba(110, 212, 255, 0.5);
     color: #6ed4ff;
     border-radius: 100px;
-    font-size: 13px;
-    letter-spacing: 4px;
+    font-size: 12px;
+    letter-spacing: 3px;
     cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.2s;
     font-family: inherit;
 }
-.start-btn:hover {
-    background: rgba(110, 212, 255, 0.1);
-    box-shadow: 0 0 30px rgba(110, 212, 255, 0.3);
-}
+.start-btn:active { background: rgba(110, 212, 255, 0.12); }
 .note {
-    margin-top: 20px;
-    font-size: 11px;
-    color: #4a6480;
+    margin-top: 24px;
+    font-size: 10px;
+    color: #44607d;
     letter-spacing: 1px;
-}
-
-@keyframes fadein {
-    from { opacity: 0; }
-    to { opacity: 1; }
 }
