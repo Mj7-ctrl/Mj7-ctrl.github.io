@@ -64,22 +64,24 @@
             </form>
             <div class="settings">
                 <label>
-                    <input type="checkbox" id="voice-toggle" checked> Stemmesvar
+                    <input type="checkbox" id="voice-toggle" checked> Stemme
                 </label>
                 <label>
-                    Sprog:
+                    <input type="checkbox" id="handsfree-toggle"> Håndfri
+                </label>
+                <label>
                     <select id="lang-select">
+                        <option value="en-GB">English (Jarvis)</option>
                         <option value="da-DK">Dansk</option>
-                        <option value="en-US">English</option>
                     </select>
                 </label>
-                <button type="button" id="clear-btn">Ryd chat</button>
+                <button type="button" id="clear-btn">Ryd</button>
             </div>
         </section>
     </main>
 
     <footer class="footbar">
-        <span>Sig "Jarvis, hjælp" for at se alle kommandoer.</span>
+        <span>Tip: Slå "Håndfri" til for at tale frit med Jarvis — eller tryk mikrofonen.</span>
     </footer>
 
     <script src="jarvis.js"></script>
