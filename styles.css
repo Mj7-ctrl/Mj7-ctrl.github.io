@@ -146,6 +146,23 @@ html, body {
 }
 .corner button:active { background: rgba(127, 169, 216, 0.15); }
 
+.corner a#founder-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: linear-gradient(135deg, #f4c26b 0%, #ff8c5a 100%);
+    color: #1a0f06;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    min-width: 40px;
+    box-shadow: 0 2px 12px rgba(244, 194, 107, 0.35);
+    transition: transform 0.2s;
+}
+.corner a#founder-link:active { transform: scale(0.94); }
+
 .overlay {
     position: fixed;
     inset: 0;
