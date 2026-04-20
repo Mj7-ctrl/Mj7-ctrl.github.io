@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Deck — Money Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="agents.css">
+</head>
+<body class="agents-body">
+    <header class="deck-header">
+        <a href="index.html" class="back-link">← JARVIS</a>
+        <h1>AGENT&nbsp;DECK</h1>
+        <div class="deck-stats">
+            <span class="stat"><span class="stat-label">Optjent</span><span id="stat-earned">0 kr</span></span>
+            <span class="stat"><span class="stat-label">Pipeline</span><span id="stat-pipeline">0 kr</span></span>
+            <span class="stat"><span class="stat-label">Idéer</span><span id="stat-ideas">0</span></span>
+        </div>
+    </header>
+
+    <nav class="deck-tabs">
+        <button class="tab active" data-tab="agents">Agenter</button>
+        <button class="tab" data-tab="vault">Idévault</button>
+        <button class="tab" data-tab="revenue">Indtægter</button>
+        <button class="tab" data-tab="plan">Ugeplan</button>
+        <button class="tab" data-tab="config">Opsæt</button>
+    </nav>
+
+    <main class="deck-main">
+        <section class="tab-panel active" id="panel-agents">
+            <div class="agent-grid" id="agent-grid"></div>
+        </section>
+
+        <section class="tab-panel" id="panel-vault">
+            <div class="vault-toolbar">
+                <input type="text" id="vault-search" placeholder="Søg i idéer…">
+                <button id="vault-export">Eksportér JSON</button>
+                <button id="vault-clear" class="danger">Ryd alt</button>
+            </div>
+            <div class="vault-list" id="vault-list"></div>
+        </section>
+
+        <section class="tab-panel" id="panel-revenue">
+            <div class="revenue-form">
+                <input type="text" id="rev-source" placeholder="Kilde (fx freelance-gig, produkt)">
+                <input type="number" id="rev-amount" placeholder="Beløb (kr)" step="0.01">
+                <select id="rev-agent"></select>
+                <button id="rev-add">Log indtægt</button>
+            </div>
+            <div class="revenue-summary" id="revenue-summary"></div>
+            <div class="revenue-list" id="revenue-list"></div>
+        </section>
+
+        <section class="tab-panel" id="panel-plan">
+            <div class="plan-toolbar">
+                <button id="plan-generate">Generér ugeplan med alle agenter</button>
+                <span id="plan-status"></span>
+            </div>
+            <div class="plan-output" id="plan-output"></div>
+        </section>
+
+        <section class="tab-panel" id="panel-config">
+            <div class="config-card">
+                <h2>API &amp; Profil</h2>
+                <label>Anthropic API-nøgle
+                    <input type="password" id="cfg-api-key" placeholder="sk-ant-…">
+                </label>
+                <label>Model
+                    <select id="cfg-model">
+                        <option value="claude-haiku-4-5-20251001">Haiku 4.5 (hurtig/billig)</option>
+                        <option value="claude-sonnet-4-6">Sonnet 4.6 (balance)</option>
+                        <option value="claude-opus-4-7">Opus 4.7 (smartest)</option>
+                    </select>
+                </label>
+                <label>Din niche / mål
+                    <textarea id="cfg-niche" rows="3" placeholder="Fx: Jeg er udvikler med 2 timer om dagen. Vil tjene 5000 kr/md ekstra. Interesse: AI-værktøjer, webudvikling."></textarea>
+                </label>
+                <label>Månedligt mål (kr)
+                    <input type="number" id="cfg-goal" placeholder="5000">
+                </label>
+                <label>Valuta-symbol
+                    <input type="text" id="cfg-currency" placeholder="kr" maxlength="4">
+                </label>
+                <div class="btn-row">
+                    <button id="cfg-save">Gem</button>
+                    <button id="cfg-reset" class="danger">Nulstil alt</button>
+                </div>
+                <p class="help-text">Data gemmes kun i din browser. API-nøglen forlader aldrig din enhed undtagen til Anthropic.</p>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal hidden" id="modal">
+        <div class="modal-panel">
+            <div class="modal-head">
+                <h2 id="modal-title">Agent</h2>
+                <button id="modal-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <p id="modal-desc" class="agent-desc"></p>
+                <label class="modal-label">Brief til agenten
+                    <textarea id="modal-brief" rows="4" placeholder="Beskriv hvad du vil have — eller lad feltet stå tomt for default-opgave."></textarea>
+                </label>
+                <div class="modal-actions">
+                    <button id="modal-run">Kør agent</button>
+                    <span id="modal-status"></span>
+                </div>
+                <div class="modal-result" id="modal-result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="agents.js"></script>
+</body>
+</html>

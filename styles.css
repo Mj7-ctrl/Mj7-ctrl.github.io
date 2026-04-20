@@ -145,6 +145,20 @@ html, body {
     min-width: 40px;
 }
 .corner button:active { background: rgba(127, 169, 216, 0.15); }
+.corner .deck-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid rgba(127, 169, 216, 0.25);
+    color: #7fa9d8;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    min-width: 40px;
+}
+.corner .deck-link:active { background: rgba(127, 169, 216, 0.15); }
 
 .overlay {
     position: fixed;
