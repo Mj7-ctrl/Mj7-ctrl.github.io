@@ -1,0 +1,376 @@
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+:root {
+    --bg: #04140d;
+    --bg2: #0a2417;
+    --gold: #e8c66a;
+    --gold-dim: #b89640;
+    --green: #1db86a;
+    --red: #e23b54;
+    --text: #e9f5ee;
+    --muted: #6f9a82;
+    --felt: #0d3a24;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    background:
+        radial-gradient(ellipse at top, #0c2e1d 0%, var(--bg) 60%, #020a06 100%);
+    color: var(--text);
+    font-family: "SF Pro Display", "Helvetica Neue", -apple-system, sans-serif;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.play-money-banner {
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-dim));
+    color: #1a1205;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    padding: 6px 10px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.casino-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 22px;
+    border-bottom: 1px solid rgba(232, 198, 106, 0.18);
+    gap: 12px;
+}
+.back-link {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-family: "SF Mono", monospace;
+    white-space: nowrap;
+}
+.back-link:hover { color: var(--gold); }
+.brand {
+    font-weight: 300;
+    letter-spacing: 7px;
+    font-size: 22px;
+    color: var(--gold);
+    text-shadow: 0 0 18px rgba(232, 198, 106, 0.4);
+}
+.wallet {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(232, 198, 106, 0.08);
+    border: 1px solid rgba(232, 198, 106, 0.3);
+    border-radius: 22px;
+    padding: 8px 16px;
+    font-family: "SF Mono", monospace;
+}
+.chip-icon { color: var(--gold); font-size: 14px; }
+#chip-balance { color: var(--gold); font-size: 18px; font-weight: 600; }
+.chip-label { color: var(--muted); font-size: 11px; }
+
+.game-tabs {
+    display: flex;
+    gap: 6px;
+    padding: 14px 22px;
+    overflow-x: auto;
+    justify-content: center;
+}
+.gtab {
+    background: transparent;
+    border: 1px solid rgba(232, 198, 106, 0.2);
+    color: var(--muted);
+    padding: 9px 18px;
+    border-radius: 22px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: all 0.15s;
+}
+.gtab:hover { color: var(--gold); border-color: var(--gold); }
+.gtab.active {
+    background: rgba(232, 198, 106, 0.15);
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.casino-main { max-width: 760px; margin: 0 auto; padding: 12px 18px 60px; }
+.game-panel { display: none; }
+.game-panel.active { display: block; animation: rise 0.3s ease; }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* TABLE (Blackjack) */
+.table {
+    background:
+        radial-gradient(ellipse at center, #14512f 0%, var(--felt) 70%, #082616 100%);
+    border: 2px solid rgba(232, 198, 106, 0.3);
+    border-radius: 20px;
+    padding: 24px 18px;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: inset 0 0 60px rgba(0,0,0,0.5);
+}
+.hand-area { text-align: center; }
+.hand-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.hand-label span { color: var(--gold); font-weight: 600; }
+.cards { display: flex; gap: 8px; justify-content: center; min-height: 92px; flex-wrap: wrap; }
+.card {
+    width: 64px;
+    height: 90px;
+    background: linear-gradient(160deg, #fff, #e8ecf0);
+    border-radius: 8px;
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 6px 8px;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    animation: deal 0.3s ease;
+}
+@keyframes deal { from { opacity: 0; transform: translateY(-20px) rotate(-6deg); } to { opacity: 1; transform: none; } }
+.card.red { color: var(--red); }
+.card .rank-b { align-self: flex-end; transform: rotate(180deg); }
+.card.back {
+    background: repeating-linear-gradient(45deg, #1a3d6e, #1a3d6e 6px, #224a82 6px, #224a82 12px);
+    border: 2px solid rgba(255,255,255,0.2);
+}
+.table-msg {
+    text-align: center;
+    font-size: 15px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    padding: 12px;
+    min-height: 24px;
+}
+.table-msg.win { color: var(--green); font-weight: 600; }
+.table-msg.lose { color: var(--red); }
+
+/* BET / ACTION ROWS */
+.bet-row { margin: 18px 0 10px; }
+.bet-control {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.chip-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #2a6e47, #0e3a23);
+    border: 2px dashed rgba(232, 198, 106, 0.5);
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.1s;
+}
+.chip-btn:active { transform: scale(0.9); }
+.chip-btn.sel { box-shadow: 0 0 0 2px var(--gold), 0 0 14px rgba(232,198,106,0.6); }
+.current-bet, .staked { font-size: 13px; color: var(--muted); margin-left: 6px; }
+.current-bet b, .staked b { color: var(--gold); font-family: "SF Mono", monospace; }
+.clear-bet {
+    background: transparent;
+    border: 1px solid rgba(232,198,106,0.25);
+    color: var(--muted);
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.action-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10px;
+}
+.action-row button {
+    padding: 12px 22px;
+    background: rgba(232, 198, 106, 0.1);
+    border: 1px solid rgba(232, 198, 106, 0.4);
+    color: var(--gold);
+    border-radius: 10px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+    min-width: 90px;
+}
+.action-row button:hover:not(:disabled) { background: rgba(232, 198, 106, 0.22); }
+.action-row button:active:not(:disabled) { transform: scale(0.97); }
+.action-row button:disabled { opacity: 0.35; cursor: not-allowed; }
+.action-row button.primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+    color: #1a1205;
+    font-weight: 600;
+    border: none;
+}
+.action-row button.danger {
+    background: rgba(226, 59, 84, 0.12);
+    border-color: rgba(226, 59, 84, 0.4);
+    color: #ff8595;
+}
+
+/* ROULETTE */
+.roulette-display { text-align: center; padding: 16px 0; }
+.wheel {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background:
+        conic-gradient(from 0deg,
+            #1db86a 0deg 10deg, #e23b54 10deg 20deg,
+            #1db86a 20deg 30deg, #e23b54 30deg 40deg,
+            #1db86a 40deg 50deg, #e23b54 50deg 60deg);
+    border: 6px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 30px rgba(232,198,106,0.3), inset 0 0 30px rgba(0,0,0,0.6);
+    position: relative;
+    transition: transform 0.2s;
+}
+.wheel.spinning { animation: spin 1.2s cubic-bezier(.2,.8,.2,1); }
+@keyframes spin { from { transform: rotate(0); } to { transform: rotate(1080deg); } }
+.wheel-number {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #04140d;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    font-weight: 700;
+    font-family: "SF Mono", monospace;
+    border: 2px solid rgba(232,198,106,0.4);
+}
+.wheel-number.red { color: var(--red); }
+.wheel-number.green { color: var(--green); }
+
+.roulette-bets {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 16px 0;
+}
+.rbet {
+    padding: 14px 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(232,198,106,0.25);
+    background: rgba(13, 58, 36, 0.6);
+    color: var(--text);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: center;
+    position: relative;
+    transition: all 0.12s;
+}
+.rbet:hover { border-color: var(--gold); }
+.rbet.red-bet { background: rgba(226, 59, 84, 0.22); }
+.rbet.black-bet { background: rgba(20, 20, 26, 0.7); }
+.rbet .payout { display: block; font-size: 10px; color: var(--muted); margin-top: 3px; }
+.rbet .placed {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: 11px;
+    color: var(--gold);
+    font-family: "SF Mono", monospace;
+    font-weight: 700;
+}
+
+/* SLOTS */
+.slots-machine { text-align: center; padding: 20px 0; }
+.reels {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+.reel {
+    width: 88px;
+    height: 88px;
+    background: linear-gradient(160deg, #102e1e, #061a0f);
+    border: 2px solid var(--gold);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 46px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+}
+.reel.spin { animation: reelspin 0.3s linear infinite; }
+@keyframes reelspin { 0% { transform: translateY(-6px); } 50% { transform: translateY(6px); } 100% { transform: translateY(-6px); } }
+.paytable {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 280px;
+    margin: 18px auto 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+.paytable .pt-row { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px solid rgba(232,198,106,0.08); }
+.paytable .pt-row b { color: var(--gold); font-family: "SF Mono", monospace; }
+
+/* STATS */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 22px;
+}
+.stat-card {
+    background: rgba(13, 58, 36, 0.5);
+    border: 1px solid rgba(232,198,106,0.2);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+}
+.stat-card .label { font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+.stat-card .value { font-size: 24px; color: var(--gold); margin-top: 6px; font-family: "SF Mono", monospace; }
+.disclaimer {
+    margin-top: 24px;
+    font-size: 11px;
+    line-height: 1.7;
+    color: var(--muted);
+    text-align: center;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 560px) {
+    .brand { font-size: 16px; letter-spacing: 4px; }
+    .card { width: 54px; height: 78px; font-size: 14px; }
+    .reel { width: 72px; height: 72px; font-size: 38px; }
+    .wheel { width: 150px; height: 150px; }
+}
