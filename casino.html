@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ivan's Block — Social Casino</title>
+    <link rel="stylesheet" href="casino.css">
+</head>
+<body>
+    <div class="play-money-banner">🎲 PLAY-MONEY · Ingen rigtige penge · Kun underholdning · Fair RNG</div>
+
+    <header class="casino-header">
+        <a href="index.html" class="back-link">← JARVIS</a>
+        <div class="brand">IVAN'S&nbsp;BLOCK</div>
+        <div class="wallet">
+            <span class="chip-icon">●</span>
+            <span id="chip-balance">1000</span>
+            <span class="chip-label">chips</span>
+        </div>
+    </header>
+
+    <nav class="game-tabs">
+        <button class="gtab active" data-game="blackjack">Blackjack</button>
+        <button class="gtab" data-game="roulette">Roulette</button>
+        <button class="gtab" data-game="slots">Slots</button>
+        <button class="gtab" data-game="stats">Stats</button>
+    </nav>
+
+    <main class="casino-main">
+        <!-- BLACKJACK -->
+        <section class="game-panel active" id="game-blackjack">
+            <div class="table">
+                <div class="hand-area">
+                    <div class="hand-label">Dealer <span id="bj-dealer-score"></span></div>
+                    <div class="cards" id="bj-dealer-cards"></div>
+                </div>
+                <div class="table-msg" id="bj-msg">Sæt din indsats og del kort</div>
+                <div class="hand-area">
+                    <div class="hand-label">Dig <span id="bj-player-score"></span></div>
+                    <div class="cards" id="bj-player-cards"></div>
+                </div>
+            </div>
+            <div class="bet-row">
+                <div class="bet-control">
+                    <button class="chip-btn" data-bet="10">10</button>
+                    <button class="chip-btn" data-bet="50">50</button>
+                    <button class="chip-btn" data-bet="100">100</button>
+                    <button class="chip-btn" data-bet="500">500</button>
+                    <span class="current-bet">Indsats: <b id="bj-bet">0</b></span>
+                    <button class="clear-bet" id="bj-clear">Nulstil</button>
+                </div>
+            </div>
+            <div class="action-row" id="bj-actions">
+                <button id="bj-deal" class="primary">Del kort</button>
+                <button id="bj-hit" disabled>Hit</button>
+                <button id="bj-stand" disabled>Stand</button>
+                <button id="bj-double" disabled>Double</button>
+            </div>
+        </section>
+
+        <!-- ROULETTE -->
+        <section class="game-panel" id="game-roulette">
+            <div class="roulette-display">
+                <div class="wheel" id="roulette-wheel">
+                    <div class="wheel-number" id="roulette-result">—</div>
+                </div>
+                <div class="table-msg" id="roulette-msg">Vælg dine indsatser og spin</div>
+            </div>
+            <div class="bet-row">
+                <div class="bet-control">
+                    <button class="chip-btn" data-bet="10">10</button>
+                    <button class="chip-btn" data-bet="50">50</button>
+                    <button class="chip-btn" data-bet="100">100</button>
+                    <span class="current-bet">Chip: <b id="roulette-chip">10</b></span>
+                </div>
+            </div>
+            <div class="roulette-bets" id="roulette-bets"></div>
+            <div class="action-row">
+                <button id="roulette-spin" class="primary">Spin</button>
+                <button id="roulette-clear">Ryd indsatser</button>
+                <span class="staked">På bordet: <b id="roulette-staked">0</b></span>
+            </div>
+        </section>
+
+        <!-- SLOTS -->
+        <section class="game-panel" id="game-slots">
+            <div class="slots-machine">
+                <div class="reels" id="slots-reels">
+                    <div class="reel" data-r="0">🍒</div>
+                    <div class="reel" data-r="1">🍋</div>
+                    <div class="reel" data-r="2">🔔</div>
+                </div>
+                <div class="table-msg" id="slots-msg">Spin for at vinde</div>
+                <div class="paytable" id="slots-paytable"></div>
+            </div>
+            <div class="bet-row">
+                <div class="bet-control">
+                    <button class="chip-btn" data-bet="10">10</button>
+                    <button class="chip-btn" data-bet="50">50</button>
+                    <button class="chip-btn" data-bet="100">100</button>
+                    <span class="current-bet">Indsats: <b id="slots-bet">10</b></span>
+                </div>
+            </div>
+            <div class="action-row">
+                <button id="slots-spin" class="primary">Spin</button>
+            </div>
+        </section>
+
+        <!-- STATS -->
+        <section class="game-panel" id="game-stats">
+            <div class="stats-grid" id="stats-grid"></div>
+            <div class="action-row">
+                <button id="bonus-btn" class="primary">Hent gratis chips (+500)</button>
+                <button id="reset-wallet" class="danger">Nulstil wallet</button>
+            </div>
+            <p class="disclaimer">
+                Ivan's Block er et gratis underholdningsspil med virtuelle chips uden nogen pengeværdi.
+                Der kan ikke indbetales eller udbetales rigtige penge. Resultaterne er tilfældige og fair —
+                ingen spil er riggede. Spil for sjov.
+            </p>
+        </section>
+    </main>
+
+    <script src="casino.js"></script>
+</body>
+</html>
